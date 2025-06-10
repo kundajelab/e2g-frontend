@@ -10,8 +10,8 @@ const SearchButton = styled("button")(({ theme, isHomePage = false }) => ({
   cursor: "pointer",
   width: "100%",
   maxWidth: isHomePage ? "90%" : "400px",
-  background: isHomePage ? "#F0F0F0" : theme.palette.secondary.main,
-  color: isHomePage ? "inherit" : "white",
+  background: "#F0F0F0" ,
+  color: "#0F0F0F",
   borderRadius: theme.spacing(0.6),
   border: isHomePage ? `1px solid #F0F0F0` : `1px solid ${theme.palette.secondary.main}`,
   padding: isHomePage ? theme.spacing(1) : theme.spacing(0.3),
@@ -73,8 +73,8 @@ function GlobalSearch({ isHomePage }) {
             sx={{
               typography: "caption",
               fontWeight: "bold",
-              color: theme => (isHomePage ? theme.palette.text : "white"),
-              backgroundColor: theme => (isHomePage ? "#CECECE" : "#235d89"),
+              color: "white",
+              backgroundColor: theme => (theme.palette.primary.main),
               padding: theme => `${theme.spacing(0.2)} ${theme.spacing(1)}`,
               borderRadius: theme => theme.spacing(0.4),
             }}
