@@ -12,6 +12,7 @@ import ProteinStructureSummary from "sections/src/variant/ProteinStructure/Summa
 import PharmacogenomicsSummary from "sections/src/variant/Pharmacogenomics/Summary";
 import VariantEffectSummary from "sections/src/variant/VariantEffect/Summary";
 import VariantEffectPredictorSummary from "sections/src/variant/VariantEffectPredictor/Summary";
+import E2GSummary from "sections/src/variant/E2GPredictions/Summary";
 import EVASummary from "sections/src/variant/EVA/Summary";
 import UniProtVariantsSummary from "sections/src/variant/UniProtVariants/Summary";
 import GWASCredibleSetsSummary from "sections/src/variant/GWASCredibleSets/Summary";
@@ -28,12 +29,14 @@ const EVASection = lazy(() => import("sections/src/variant/EVA/Body"));
 const UniProtVariantsSection = lazy(() => import("sections/src/variant/UniProtVariants/Body"));
 const GWASCredibleSetsSection = lazy(() => import("sections/src/variant/GWASCredibleSets/Body"));
 const QTLCredibleSetsSection = lazy(() => import("sections/src/variant/QTLCredibleSets/Body"));
+const E2GPredictionsSection = lazy(() => import("sections/src/variant/E2GPredictions/Body"));
 
 const summaries = [
-  ProteinStructureSummary,
+  // ProteinStructureSummary,
   PharmacogenomicsSummary,
   VariantEffectSummary,
   VariantEffectPredictorSummary,
+  E2GSummary,
   EVASummary,
   UniProtVariantsSummary,
   GWASCredibleSetsSummary,
@@ -68,8 +71,9 @@ function Profile({ varId }: ProfileProps) {
       <ProfileHeader />
 
       <SummaryContainer>
+        <E2GSummary />
         <VariantEffectSummary />
-        <ProteinStructureSummary />
+        {/* <ProteinStructureSummary /> */}
         <VariantEffectPredictorSummary />
         <EVASummary />
         <UniProtVariantsSummary />
@@ -80,11 +84,14 @@ function Profile({ varId }: ProfileProps) {
 
       <SectionContainer>
         <Suspense fallback={<SectionLoader />}>
-          <VariantEffectSection id={varId} entity={VARIANT} />
+          <E2GPredictionsSection id={varId} entity={VARIANT} />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
-          <ProteinStructureSection id={varId} entity={VARIANT} />
+          <VariantEffectSection id={varId} entity={VARIANT} />
         </Suspense>
+        {/* <Suspense fallback={<SectionLoader />}>
+          <ProteinStructureSection id={varId} entity={VARIANT} />
+        </Suspense> */}
         <Suspense fallback={<SectionLoader />}>
           <VariantEffectPredictorSection id={varId} entity={VARIANT} />
         </Suspense>

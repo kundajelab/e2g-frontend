@@ -1,0 +1,36 @@
+fragment VariantPageEnhancerGenePrediction on EnhancerGenePrediction {
+  id
+  score
+  cellType
+  score
+  # variantToGeneDistance
+  enhancerStart
+  enhancerClass
+  enhancerEnd
+  targetGeneTss
+  enhancerToGeneDistance
+  model
+  dataset
+  datatrack {
+    id
+    atacSignalUrl
+    dnaseSignalUrl
+    e2gPredictionsUrl
+    elementsUrl
+  }
+  targetGene {
+    id
+    symbol
+  }
+}
+query Variant($variantId: String!) {
+  variant(variantId: $variantId) {
+    id
+    enhancerGenePredictionsCount
+    enhancerGenePredictions {
+      ...VariantPageEnhancerGenePrediction
+    }
+    referenceAllele
+    alternateAllele
+  }
+}

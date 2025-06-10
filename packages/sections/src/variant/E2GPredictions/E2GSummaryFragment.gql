@@ -1,0 +1,3 @@
+fragment E2GSummaryFragment on Variant {
+  enhancerGenePredictionsCount
+}
