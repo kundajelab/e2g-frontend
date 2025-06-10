@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useAtom } from "jotai";
-import { igvTracksSet } from "../../state/igv-tracks";
 import { IGVBrowserHandle } from "./IGVBrowser";
 import { BGZip } from "igv-utils";
 
@@ -24,8 +23,9 @@ const ExportIGVSession: React.FC<{
   igvBrowserRef: React.RefObject<IGVBrowserHandle>;
   sessionData: string | null;
   hideImport?: boolean;
-}> = ({ igvBrowserRef, sessionData, hideImport = false }) => {
-  const [tracksSet, setTracksSet] = useAtom(igvTracksSet);
+  igvTracksSetAtom: any;
+}> = ({ igvBrowserRef, sessionData, hideImport = false, igvTracksSetAtom }) => {
+  const [tracksSet, setTracksSet] = useAtom(igvTracksSetAtom);
   const [openExportDialog, setOpenExportDialog] = useState(false);
   const [openImportDialog, setOpenImportDialog] = useState(false);
   const [openLinkDialog, setOpenLinkDialog] = useState(false);

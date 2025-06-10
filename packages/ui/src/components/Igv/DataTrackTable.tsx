@@ -1,31 +1,25 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Link, OtTable } from "ui";
 import {
   IconButton,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Collapse,
   Tooltip,
   Box,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useAtom } from "jotai";
-import { igvTracksSet } from "../../state/igv-tracks";
-import ITrackInfo from "../../state/ITrackInfo";
+import ITrackInfo from "./ITrackInfo";
 
 type DataTableProps = {
   loading: boolean;
   error: any;
   data: any[];
   filenameStem: string;
+  igvTracksSetAtom: any;
 };
 
-const DataTable: React.FC<DataTableProps> = ({ loading, error, data, filenameStem }) => {
-  const [tracksSet, setTracksSet] = useAtom(igvTracksSet);
+const DataTrackTable: React.FC<DataTableProps> = ({ loading, error, data, filenameStem, igvTracksSetAtom }) => {
+  const [tracksSet, setTracksSet] = useAtom(igvTracksSetAtom);
 
   console.log("akdsfjlkdjflakdf");
   console.log(tracksSet);
@@ -307,4 +301,4 @@ const DataTable: React.FC<DataTableProps> = ({ loading, error, data, filenameSte
   );
 };
 
-export default DataTable;
+export default DataTrackTable;

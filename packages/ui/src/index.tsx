@@ -68,6 +68,7 @@ export * from "./components/PublicationsDrawer";
 export * from "./components/ExternalLink";
 export * from "./components/RoutingTabs";
 export * from "./components/HeatmapTable";
+export * from "./components/Igv";
 
 /* SHARED PAGES  */
 export { default as EmptyPage } from "./pages/EmptyPage";

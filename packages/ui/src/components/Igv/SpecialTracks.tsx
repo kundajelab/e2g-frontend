@@ -3,8 +3,7 @@ import { Paper, IconButton, Typography, Box, Stack, Divider } from "@mui/materia
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useAtom } from "jotai";
-import { igvTracksSet } from "../../state/igv-tracks";
-import ITrackInfo from "../../state/ITrackInfo";
+import ITrackInfo from "./ITrackInfo";
 
 // Default tracks to be loaded into IGV
 const specialTracks: ITrackInfo[] = [
@@ -37,8 +36,8 @@ const specialTracks: ITrackInfo[] = [
   },
 ];
 
-const SpecialTracksTable: React.FC = () => {
-  const [tracksSet, setTracksSet] = useAtom(igvTracksSet);
+const SpecialTracksTable: React.FC<{ igvTracksSetAtom: any }> = ({ igvTracksSetAtom }) => {
+  const [tracksSet, setTracksSet] = useAtom<ITrackInfo[]>(igvTracksSetAtom);
 
   // Initialize default tracks on mount
   useEffect(() => {

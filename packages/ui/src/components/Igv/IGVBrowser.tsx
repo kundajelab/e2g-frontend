@@ -2,21 +2,20 @@
 import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
 // @ts-ignore
 import igv from "igv";
-import { igvTracksSet } from "../../state/igv-tracks";
 import { useAtom } from "jotai";
-import ITrackInfo from "../../state/ITrackInfo";
+import ITrackInfo from "./ITrackInfo";
 
 export interface IGVBrowserHandle {
   getBrowser: () => any;
   setROI: (roi: any[]) => void;
 }
 
-const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: string }>(
-  ({ locus, variantId }, ref) => {
+const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: string; igvTracksSetAtom: any }>(
+  ({ locus, variantId, igvTracksSetAtom }, ref) => {
     const containerRef = useRef(null);
     const [hasRendered, setHasRendered] = useState(false);
     const [browserInitialized, setBrowserInitialized] = useState(false);
-    const [tracksSet] = useAtom(igvTracksSet);
+    const [tracksSet] = useAtom<ITrackInfo[]>(igvTracksSetAtom);
     const browserRef = useRef<any>(null);
     const prevTrackSet = useRef<ITrackInfo[]>(tracksSet);
     const pendingROIRef = useRef<any[] | null>(null);

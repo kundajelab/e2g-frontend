@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { Box, Paper, Button, Typography } from "@mui/material";
-import IGVBrowser, { IGVBrowserHandle } from "../../components/Igv/IGVBrowser";
+import {
+  IGVBrowser,
+  IGVBrowserHandle,
+  DataTrackTable,
+  Filters,
+  ExportIGVSession,
+  SpecialTracks,
+  BasePage,
+  ITrackInfo,
+} from "ui";
 import { useQuery } from "@apollo/client";
-import DataTrackTable from "../../components/Igv/DataTrackTable";
-import Filters from "../../components/Igv/Filters";
 import { useAtom } from "jotai";
 import { igvTracksSet } from "../../state/igv-tracks";
-import { BasePage } from "ui";
-import ExportIGVSession from "../../components/Igv/ExportIGV";
-import DefaultTracksTable from "../../components/Igv/SpecialTracks";
 import {
   Dialog,
   DialogActions,
@@ -16,7 +20,6 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import ITrackInfo from "../../state/ITrackInfo";
 import { useNavigate, useLocation } from "react-router-dom";
 import DATA_TRACKS_TABLE_FRAGMENT from "./DataTracks.gql";
 
@@ -163,11 +166,19 @@ const IGVPage = () => {
       </Typography>
       <Box sx={{ width: "100%", minHeight: "100vh", marginTop: "2vh" }}>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <ExportIGVSession igvBrowserRef={igvBrowserRef} sessionData={sessionData} />
+          <ExportIGVSession
+            igvBrowserRef={igvBrowserRef}
+            sessionData={sessionData}
+            igvTracksSetAtom={igvTracksSet}
+          />
         </div>
 
         <Box sx={{ transition: "height 0.3s" }}>
-          <IGVBrowser ref={igvBrowserRef} locus="chr1:1-248,956,422" />
+          <IGVBrowser
+            ref={igvBrowserRef}
+            locus="chr1:1-248,956,422"
+            igvTracksSetAtom={igvTracksSet}
+          />
         </Box>
 
         <Typography variant="h6" sx={{ mt: 1, color: "text.secondary" }}>
@@ -187,7 +198,7 @@ const IGVPage = () => {
         >
           {/* Left side - Filters */}
           <Box sx={{ width: "25%", padding: 2 }}>
-            <DefaultTracksTable />
+            <SpecialTracks igvTracksSetAtom={igvTracksSet} />
             <Box sx={{ mt: 3 }}></Box>
             <Filters
               data={data?.getDataTracks || []}
@@ -227,6 +238,7 @@ const IGVPage = () => {
                 loading={loading}
                 error={error}
                 filenameStem="DataTracks"
+                igvTracksSetAtom={igvTracksSet}
               />
             </Paper>
           </Box>
