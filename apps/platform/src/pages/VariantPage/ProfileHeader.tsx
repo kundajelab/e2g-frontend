@@ -11,6 +11,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { identifiersOrgLink } from "@ot/utils";
 
 import VARIANT_PROFILE_HEADER_FRAGMENT from "./ProfileHeader.gql";
+import { Fragment } from "react/jsx-runtime";
 
 function ProfileHeader() {
   const { loading, error, data } = usePlatformApi();
@@ -47,6 +48,28 @@ function ProfileHeader() {
             {data?.variant.mostSevereConsequence.label.replace(/_/g, " ")}
           </Link>
         </Field>
+        <Typography variant="subtitle2" mt={1}>
+          Predictions
+        </Typography>
+        <Typography variant="subtitle2">
+          Enhancer-Gene Prediction Cell Types:{" "}
+          {data?.variant.uniqueEnhancerGenePredictionCellTypes?.length ?? "N/A"}
+        </Typography>
+        <Typography variant="subtitle2">
+          Enhancer-Gene Prediction Target Genes:{" "}
+          {data?.variant?.uniqueEnhancerGenePredictionTargetGenes?.length > 0
+            ? data.variant.uniqueEnhancerGenePredictionTargetGenes.map((gene, i) => (
+                <Fragment key={gene.id}>
+                  <Link key={gene.id} to={`/target/${gene.id}`}>
+                    {gene.symbol}
+                  </Link>
+                  {i <
+                    data.variant.uniqueEnhancerGenePredictionTargetGenes!.length -
+                      1 && <span>, </span>}
+                </Fragment>
+              ))
+            : 'N/A'}
+        </Typography>
       </Box>
 
       {data?.variant.alleleFrequencies.length > 0 && (

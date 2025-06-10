@@ -12,4 +12,9 @@ fragment VariantProfileHeaderFragment on Variant {
     id
     label
   }
+  uniqueEnhancerGenePredictionCellTypes
+  uniqueEnhancerGenePredictionTargetGenes {
+    id
+    symbol
+  }
 }
