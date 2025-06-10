@@ -1,0 +1,23 @@
+fragment VariantLinkageDisequilibrium on LinkageDisequilibrium {
+  id
+  variantId
+  variantRsId
+  variantPosition
+  r2
+  dPrime
+  egCellTypes
+  egGenes
+  mostSevereConsequence
+}
+query VariantLinkageDisequilibrium($variantId: String!) {
+  variant(variantId: $variantId) {
+    id
+    linkageDisequilibriums {
+      ...VariantLinkageDisequilibrium
+    }
+    referenceAllele
+    alternateAllele
+    linkageDisequilibriumsCount
+    rsIds
+  }
+}

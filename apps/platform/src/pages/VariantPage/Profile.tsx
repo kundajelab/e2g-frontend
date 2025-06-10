@@ -14,6 +14,7 @@ import VariantEffectSummary from "sections/src/variant/VariantEffect/Summary";
 import VariantEffectPredictorSummary from "sections/src/variant/VariantEffectPredictor/Summary";
 import E2GSummary from "sections/src/variant/E2GPredictions/Summary";
 import EVASummary from "sections/src/variant/EVA/Summary";
+import LinkageDisequilibriumSummary from "sections/src/variant/LinkageDisequilibrium/Summary";  
 import UniProtVariantsSummary from "sections/src/variant/UniProtVariants/Summary";
 import GWASCredibleSetsSummary from "sections/src/variant/GWASCredibleSets/Summary";
 import QTLCredibleSetsSummary from "sections/src/variant/QTLCredibleSets/Summary";
@@ -30,6 +31,7 @@ const UniProtVariantsSection = lazy(() => import("sections/src/variant/UniProtVa
 const GWASCredibleSetsSection = lazy(() => import("sections/src/variant/GWASCredibleSets/Body"));
 const QTLCredibleSetsSection = lazy(() => import("sections/src/variant/QTLCredibleSets/Body"));
 const E2GPredictionsSection = lazy(() => import("sections/src/variant/E2GPredictions/Body"));
+const LinkageDisequilibriumSection = lazy(() => import("sections/src/variant/LinkageDisequilibrium/Body"));
 
 const summaries = [
   // ProteinStructureSummary,
@@ -41,6 +43,7 @@ const summaries = [
   UniProtVariantsSummary,
   GWASCredibleSetsSummary,
   QTLCredibleSetsSummary,
+  LinkageDisequilibriumSummary,
 ];
 
 const VARIANT = "variant";
@@ -72,6 +75,7 @@ function Profile({ varId }: ProfileProps) {
 
       <SummaryContainer>
         <E2GSummary />
+        <LinkageDisequilibriumSummary />
         <VariantEffectSummary />
         {/* <ProteinStructureSummary /> */}
         <VariantEffectPredictorSummary />
@@ -85,6 +89,9 @@ function Profile({ varId }: ProfileProps) {
       <SectionContainer>
         <Suspense fallback={<SectionLoader />}>
           <E2GPredictionsSection id={varId} entity={VARIANT} />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <LinkageDisequilibriumSection id={varId} entity={VARIANT} />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <VariantEffectSection id={varId} entity={VARIANT} />

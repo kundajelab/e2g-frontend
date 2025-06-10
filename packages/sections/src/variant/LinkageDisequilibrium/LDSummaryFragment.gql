@@ -1,0 +1,3 @@
+fragment LDSummaryFragment on Variant {
+  id
+}
