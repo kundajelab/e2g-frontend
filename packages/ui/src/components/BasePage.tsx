@@ -28,7 +28,7 @@ function BasePage({ title, children, description, location }: BasePageProps): Re
   return (
     <Page
       header={<NavBar name="Platform" search={<GlobalSearch />} items={mainMenuItems} />}
-      footer={<Footer externalLinks={externalLinks} />}
+      // footer={<Footer externalLinks={externalLinks} />}
     >
       <Helmet title={composedTitle}>
         <meta name="description" content={description || appDescription} />

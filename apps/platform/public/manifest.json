@@ -1,6 +1,6 @@
 {
-  "short_name": "Open Targets Platform",
-  "name": "Open Targets Platform",
+  "short_name": "E2G",
+  "name": "Enhancer2Gene",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#3489ca",
+  "theme_color": "#B83A4B",
   "background_color": "#ffffff"
 }

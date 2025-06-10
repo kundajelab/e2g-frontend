@@ -1,5 +1,6 @@
 import { Link as ReactRouterLink } from "react-router-dom";
-import { AppBar, Toolbar, Button, Typography, useMediaQuery, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, useMediaQuery, Box, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { makeStyles, useTheme } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import classNames from "classnames";
@@ -9,6 +10,7 @@ import Link from "./Link";
 import OpenTargetsTitle from "./OpenTargetsTitle";
 import HeaderMenu from "./HeaderMenu";
 import PrivateWrapper from "./PrivateWrapper";
+import { GitHub } from "@mui/icons-material";
 
 const LogoBTN = styled(Button)`
   border: none;
@@ -73,6 +75,7 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     display: "flex",
     justifyContent: "end",
+    alignItems: "center",
   },
 }));
 
@@ -91,6 +94,7 @@ function NavBar({ name, search, api, downloads, docs, contact, homepage, items, 
   const theme = useTheme();
   const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
   const isHomePageRegular = homepage && !smMQ;
+  const navigate = useNavigate();
   return (
     <AppBar
       className={classNames(classes.navbar, {
@@ -120,11 +124,11 @@ function NavBar({ name, search, api, downloads, docs, contact, homepage, items, 
             display: { xs: "none", md: "flex" },
           }}
         >
-          {homepage ? null : (
-            <LogoBTN component={ReactRouterLink} to="/" color="inherit">
-              <OpenTargetsTitle name={name} />
-            </LogoBTN>
-          )}
+          {/* {homepage ? null : ( */}
+          <LogoBTN component={ReactRouterLink} to="/" color="inherit">
+            <OpenTargetsTitle name={name} />
+          </LogoBTN>
+          {/* )} */}
         </Box>
 
         <Box
@@ -144,63 +148,31 @@ function NavBar({ name, search, api, downloads, docs, contact, homepage, items, 
         </Box>
 
         <div className={classes.navMenu}>
-          {docs ? (
-            <MenuExternalLink classes={classes} href={docs}>
-              Docs
-            </MenuExternalLink>
-          ) : null}
-
-          {api ? (
-            <MenuExternalLink classes={classes} href={api}>
-              API
-            </MenuExternalLink>
-          ) : null}
-
-          {downloads ? (
-            <MenuExternalLink classes={classes} href={downloads}>
-              Downloads
-            </MenuExternalLink>
-          ) : null}
-
-          {contact ? (
-            <MenuExternalLink classes={classes} href={contact}>
-              Contact
-            </MenuExternalLink>
-          ) : null}
-
-          {items && !isHomePageRegular ? <HeaderMenu items={items} placement={placement} /> : null}
-
-          {isHomePageRegular && (
-            <Box sx={{ display: "flex" }}>
-              {items.map(item => {
-                if (item.showOnlyPartner) {
-                  return (
-                    <PrivateWrapper key={v1()}>
-                      <Link
-                        footer
-                        external={item.external}
-                        to={item.url}
-                        className={classes.menuLink}
-                      >
-                        <Typography variant="body2">{item.name}</Typography>
-                      </Link>
-                    </PrivateWrapper>
-                  );
-                }
-                return (
-                  <Link
-                    key={v1()}
-                    footer
-                    external={item.external}
-                    to={item.url}
-                    className={classes.menuLink}
-                  >
-                    <Typography variant="body2">{item.name}</Typography>
-                  </Link>
-                );
-              })}
-            </Box>
-          )}
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => navigate("/igv")}
+            sx={{
+              marginLeft: "2rem",
+              ml: {
+                xs: 1,
+                sm: 2,
+                md: 0,
+              },
+            }}
+          >
+            <Typography color="white">IGV Browser</Typography>
+          </Button>
+          <IconButton
+            component="a"
+            href="https://github.com/kundajelab/e2g-frontend"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="inherit"
+            sx={{ marginLeft: "0.5rem" }}
+          >
+            <GitHub />
+          </IconButton>
         </div>
       </Toolbar>
     </AppBar>

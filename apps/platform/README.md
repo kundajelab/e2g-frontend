@@ -1,8 +1,6 @@
-# Open Targets Platform App
+# E2G App
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/58a127ca-67c0-4cc3-b9e3-88dad47cfc7f/deploy-status)](https://app.netlify.com/sites/platform-app/deploys)
-
-This repository holds the new [Open Targets Platform](https://www.targetvalidation.org) web app.
+This repository holds the new [E2G](https://e2g.stanford.edu) web app.
 
 It is a Single Page Application built on [React](https://reactjs.org/) using [Apollo GraphQL](https://www.apollographql.com/docs/react/v3.0-beta) for the data fetching and management and the [Material-UI](https://material-ui.com/) component collection.
 

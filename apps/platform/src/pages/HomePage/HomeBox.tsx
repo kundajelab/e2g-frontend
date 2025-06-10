@@ -63,9 +63,9 @@ function HomeBox({ children }: HomeBoxProps): JSX.Element {
   return (
     <Grid item xs={12} sm={12} md={8} lg={8}>
       <Paper elevation={1} sx={styles.homeboxContainer}>
-        <Box sx={styles.homeboxHeader}>
+        {/* <Box sx={styles.homeboxHeader}>
           {isPartnerPreview ? <PPOTLogo sx={styles.logo} /> : <OTLogo sx={styles.logo} />}
-        </Box>
+        </Box> */}
         {children}
       </Paper>
       {isPartnerPreview && (

@@ -33,11 +33,11 @@ export function selectRandomItems<T>(arr: T[], n: number): T[] {
 export function getSuggestedSearch(): Suggestion[] {
   const suggestionArray: SearchSuggestions = searchSuggestions;
   const categories = [
-    selectRandomItems(suggestionArray.targets, 2),
-    selectRandomItems(suggestionArray.diseases, 2),
-    selectRandomItems(suggestionArray.drugs, 2),
-    selectRandomItems(suggestionArray.variants, 2),
-    selectRandomItems(suggestionArray.studies, 2),
+    // selectRandomItems(suggestionArray.targets, 2),
+    // selectRandomItems(suggestionArray.diseases, 2),
+    // selectRandomItems(suggestionArray.drugs, 2),
+    selectRandomItems(suggestionArray.variants, 4),
+    // selectRandomItems(suggestionArray.studies, 2),
   ];
   return categories.flat();
 }

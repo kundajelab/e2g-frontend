@@ -28,7 +28,7 @@ function App(): ReactElement {
     <OTConfigurationProvider config={config}>
       <SearchProvider
         searchQuery={SEARCH_QUERY}
-        searchPlaceholder="Search for a target, drug, disease, or phenotype..."
+        searchPlaceholder="Search for a variant to find predicted enhancers and target genes..."
       >
         <Router>
           <Routes>

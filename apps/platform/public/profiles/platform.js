@@ -7,8 +7,8 @@ var configProfile = {
   communityTicketUrl: 'https://community.opentargets.org/c/community-feedback/bug-reports/34',
 
   /* colors */
-  primaryColor: '#3489ca',
-  secondaryColor: '#18405e',
+  primaryColor: '#B83A4B',
+  secondaryColor: '#417865',
   
   // colorRange: [],
   // custom colour scale: override value in constants.js

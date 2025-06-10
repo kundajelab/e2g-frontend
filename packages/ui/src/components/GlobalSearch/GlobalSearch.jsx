@@ -24,9 +24,9 @@ function GlobalSearch({ isHomePage }) {
     width: 1,
     display: "flex",
     justifyContent: "center",
-    ...(isHomePage && {
-      margin: theme => `${theme.spacing(5)} 0 ${theme.spacing(5)}`,
-    }),
+    // ...(isHomePage && {
+    //   margin: theme => `${theme.spacing(5)} 0 ${theme.spacing(5)}`,
+    // }),
   };
 
   function monitorCmdK(event) {
@@ -67,7 +67,7 @@ function GlobalSearch({ isHomePage }) {
             sx={{ paddingLeft: theme => theme.spacing(1), display: "flex", alignItems: "center" }}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} size="xs" />
-            <Typography sx={{ ml: 2 }}>Search...</Typography>
+            <Typography sx={{ ml: 2 }}>{isHomePage ? "Search for a variant to find predicted enhancers and target genes..." : "Search..."}</Typography>
           </Box>
           <Box
             sx={{

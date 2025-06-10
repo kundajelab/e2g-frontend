@@ -30,8 +30,7 @@ function OpenTargetsTitle({ className, name }: OpenTargetsTitleProps) {
   const displayedAppName = isPartnerPreview ? "Partner Preview Platform" : name;
   return (
     <Typography className={titleClasses} variant="h6" color="inherit">
-      <span className={classes.fat}>Open Targets </span>
-      <span className={classes.thin}>{displayedAppName}</span>
+      Enhancer2Gene
     </Typography>
   );
 }
