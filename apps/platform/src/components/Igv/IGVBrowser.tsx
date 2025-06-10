@@ -2,9 +2,9 @@
 import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
 // @ts-ignore
 import igv from "igv";
-import { igvTracksSet } from "../state/igv-tracks";
+import { igvTracksSet } from "../../state/igv-tracks";
 import { useAtom } from "jotai";
-import ITrackInfo from "../state/ITrackInfo";
+import ITrackInfo from "../../state/ITrackInfo";
 
 export interface IGVBrowserHandle {
   getBrowser: () => any;

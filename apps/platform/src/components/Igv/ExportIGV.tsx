@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Box,
@@ -9,18 +9,15 @@ import {
   TextField,
   Typography,
   IconButton,
-} from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { useAtom } from 'jotai';
-import { igvTracksSet } from '../state/igv-tracks';
-import { IGVBrowserHandle } from './IGVBrowser';
-import { BGZip } from 'igv-utils';
+} from "@mui/material";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useAtom } from "jotai";
+import { igvTracksSet } from "../../state/igv-tracks";
+import { IGVBrowserHandle } from "./IGVBrowser";
+import { BGZip } from "igv-utils";
 
 const exclusionFn = (track: any) => {
-  return (
-    !['wig', 'annotation', 'interact'].includes(track.type) ||
-    track.format === 'refgene'
-  );
+  return !["wig", "annotation", "interact"].includes(track.type) || track.format === "refgene";
 };
 
 const ExportIGVSession: React.FC<{
@@ -32,7 +29,7 @@ const ExportIGVSession: React.FC<{
   const [openExportDialog, setOpenExportDialog] = useState(false);
   const [openImportDialog, setOpenImportDialog] = useState(false);
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
-  const [shareableLink, setShareableLink] = useState('');
+  const [shareableLink, setShareableLink] = useState("");
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const linkInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -51,13 +48,11 @@ const ExportIGVSession: React.FC<{
         continue;
       }
       track.order = i;
-      const correspondingTrack = tracksSet.find(
-        (t) => t.trackUrl === track.url
-      );
+      const correspondingTrack = tracksSet.find(t => t.trackUrl === track.url);
       track.metadata = {
-        cellTypeID: correspondingTrack?.cellTypeID || 'unknown',
-        cellTypeName: correspondingTrack?.cellTypeName || 'Unknown',
-        study: correspondingTrack?.study || 'Imported',
+        cellTypeID: correspondingTrack?.cellTypeID || "unknown",
+        cellTypeName: correspondingTrack?.cellTypeName || "Unknown",
+        study: correspondingTrack?.study || "Imported",
         trackType: correspondingTrack?.trackType || inferTrackType(track.url),
         model: correspondingTrack?.model || null,
       };
@@ -79,13 +74,10 @@ const ExportIGVSession: React.FC<{
         continue;
       }
       importedTracks.push({
-        cellTypeID: track.metadata?.cellTypeID || 'unknown',
-        cellTypeName:
-          track.metadata?.cellTypeName ||
-          track.name.split(' - ')[0] ||
-          'Unknown',
-        study: track.metadata?.study || 'Imported',
-        studyUrl: '',
+        cellTypeID: track.metadata?.cellTypeID || "unknown",
+        cellTypeName: track.metadata?.cellTypeName || track.name.split(" - ")[0] || "Unknown",
+        study: track.metadata?.study || "Imported",
+        studyUrl: "",
         trackUrl: track.url,
         trackType: track.metadata?.trackType || inferTrackType(track.url),
         model: track.metadata?.model || null,
@@ -103,13 +95,13 @@ const ExportIGVSession: React.FC<{
   const exportSessionAsFile = () => {
     const session = exportSession();
     const blob = new Blob([JSON.stringify(session)], {
-      type: 'application/json',
+      type: "application/json",
     });
     const url = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'IGV_session.json';
+    link.download = "IGV_session.json";
     link.click();
     URL.revokeObjectURL(url);
     setOpenExportDialog(false);
@@ -119,8 +111,8 @@ const ExportIGVSession: React.FC<{
     const baseUrl = window.location.origin;
     const compressedSession = exportCompressedSession();
     const url = new URL(baseUrl);
-    url.pathname = '/igv';
-    url.searchParams.set('session', compressedSession);
+    url.pathname = "/igv";
+    url.searchParams.set("session", compressedSession);
 
     const linkText = url.toString();
     setShareableLink(linkText);
@@ -129,25 +121,25 @@ const ExportIGVSession: React.FC<{
       // Check if clipboard API is available
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(linkText);
-        alert('Shareable IGV link copied to clipboard!');
+        alert("Shareable IGV link copied to clipboard!");
         setOpenExportDialog(false);
       } else {
         // Fallback: Create a temporary textarea element to copy text
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = linkText;
         // Make the textarea out of viewport
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
 
-        const successful = document.execCommand('copy');
+        const successful = document.execCommand("copy");
         document.body.removeChild(textArea);
 
         if (successful) {
-          alert('Shareable IGV link copied to clipboard!');
+          alert("Shareable IGV link copied to clipboard!");
           setOpenExportDialog(false);
         } else {
           // If execCommand also fails, show the link dialog
@@ -156,7 +148,7 @@ const ExportIGVSession: React.FC<{
         }
       }
     } catch (err) {
-      console.error('Failed to copy link:', err);
+      console.error("Failed to copy link:", err);
       // Show the link dialog
       setOpenExportDialog(false);
       setOpenLinkDialog(true);
@@ -169,25 +161,25 @@ const ExportIGVSession: React.FC<{
         navigator.clipboard
           .writeText(shareableLink)
           .then(() => {
-            alert('Link copied to clipboard!');
+            alert("Link copied to clipboard!");
           })
           .catch(() => {
             // If clipboard API fails, try execCommand
             if (linkInputRef.current) {
               linkInputRef.current.select();
-              document.execCommand('copy');
-              alert('Link copied to clipboard!');
+              document.execCommand("copy");
+              alert("Link copied to clipboard!");
             }
           });
       } else if (linkInputRef.current) {
         linkInputRef.current.select();
-        const successful = document.execCommand('copy');
+        const successful = document.execCommand("copy");
         if (successful) {
-          alert('Link copied to clipboard!');
+          alert("Link copied to clipboard!");
         }
       }
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 
@@ -196,67 +188,63 @@ const ExportIGVSession: React.FC<{
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = e => {
       try {
         const session = JSON.parse(e.target?.result as string);
         importSessionFromJSON(session);
         setOpenImportDialog(false);
       } catch (error) {
-        console.error('Error importing session:', error);
-        alert(
-          'Failed to import session file. Please ensure it is a valid IGV session JSON.'
-        );
+        console.error("Error importing session:", error);
+        alert("Failed to import session file. Please ensure it is a valid IGV session JSON.");
       }
     };
     reader.readAsText(file);
   };
 
   const inferTrackType = (url: string): string => {
-    const fileExtension =
-      url.split('.').pop()?.split('?')[0]?.toLowerCase() || '';
+    const fileExtension = url.split(".").pop()?.split("?")[0]?.toLowerCase() || "";
 
     switch (fileExtension) {
-      case 'bw':
-      case 'bigwig':
-        return 'Signal';
-      case 'bedpe':
-        return 'Interaction';
-      case 'bed':
-        return 'Elements';
-      case 'bb':
-      case 'bigbed':
-        return 'Annotation';
+      case "bw":
+      case "bigwig":
+        return "Signal";
+      case "bedpe":
+        return "Interaction";
+      case "bed":
+        return "Elements";
+      case "bb":
+      case "bigbed":
+        return "Annotation";
       default:
-        return 'Track';
+        return "Track";
     }
   };
 
   return (
     <>
-      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-end" }}>
         <Button
           variant="contained"
           onClick={() => setOpenExportDialog(true)}
-          sx={{ mr: 1,color: 'white' }}
+          sx={{ mr: 1, color: "white" }}
         >
           Export Session
         </Button>
         {!hideImport && (
-          <Button variant="contained" onClick={() => setOpenImportDialog(true)} sx={{color: 'white'}}>
+          <Button
+            variant="contained"
+            onClick={() => setOpenImportDialog(true)}
+            sx={{ color: "white" }}
+          >
             Import Session
           </Button>
         )}
       </Box>
 
       {/* Export Dialog */}
-      <Dialog
-        open={openExportDialog}
-        onClose={() => setOpenExportDialog(false)}
-      >
+      <Dialog open={openExportDialog} onClose={() => setOpenExportDialog(false)}>
         <DialogTitle>Export Session</DialogTitle>
-        <DialogContent>
-          Choose how you would like to export your session:
-        </DialogContent>
+        <DialogContent>Choose how you would like to export your session:</DialogContent>
         <DialogActions>
           <Button onClick={exportSessionAsFile}>Download JSON</Button>
           <Button onClick={createShareableLink}>Copy Link</Button>
@@ -265,14 +253,9 @@ const ExportIGVSession: React.FC<{
 
       {/* Import Dialog */}
       {!hideImport && (
-        <Dialog
-          open={openImportDialog}
-          onClose={() => setOpenImportDialog(false)}
-        >
+        <Dialog open={openImportDialog} onClose={() => setOpenImportDialog(false)}>
           <DialogTitle>Import Session</DialogTitle>
-          <DialogContent>
-            Choose how you would like to import your session:
-          </DialogContent>
+          <DialogContent>Choose how you would like to import your session:</DialogContent>
           <DialogActions>
             <Button component="label">
               From JSON
@@ -300,7 +283,7 @@ const ExportIGVSession: React.FC<{
           <Typography variant="body2" sx={{ mb: 2 }}>
             Copy this link to share your IGV session:
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -314,7 +297,7 @@ const ExportIGVSession: React.FC<{
                   </IconButton>
                 ),
               }}
-              onClick={(e) => (e.target as HTMLInputElement).select()}
+              onClick={e => (e.target as HTMLInputElement).select()}
             />
           </Box>
         </DialogContent>
