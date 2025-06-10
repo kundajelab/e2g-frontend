@@ -1,0 +1,19 @@
+query DataTracksTable {
+    getDataTracks {
+       id
+       cellTypeId
+       cellType
+       study
+       studyId
+       dataset
+       datasetUrl
+       paperUrl
+       dnaseSignalUrl
+       atacSignalUrl
+       e2gPredictionsUrl
+       variantPredsUrl
+       elementsUrl
+       modelType
+    }
+}
+

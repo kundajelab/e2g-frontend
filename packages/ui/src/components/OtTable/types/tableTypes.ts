@@ -34,6 +34,9 @@ export type OtTableProps = {
   loading: boolean;
   enableMultipleRowSelection: boolean;
   getSelectedRows: (r: Row<any>[]) => void;
+  staticColumns: boolean;
+  staticRows: boolean;
+  pageSize: number;
 };
 
 export type loadingTableRows = {

@@ -4964,6 +4964,15 @@ ignore@^5.2.0, ignore@^5.2.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
+"igv-utils@github:igvteam/igv-utils#v1.5.10":
+  version "1.5.10"
+  resolved "https://codeload.github.com/igvteam/igv-utils/tar.gz/a9726935178fc488e74bdc3c5c1059613d805415"
+
+igv@3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/igv/-/igv-3.2.5.tgz#83ee8db958e602274337321398eedc4b2104f2d3"
+  integrity sha512-iBYiLsGfdvEMZOxd/QXVSd7T5TlS9ybNamQsS9M1CvuPfmOrNUfQHsEilgTABKYiB0K63cc1RcaEDCDjUqiJuQ==
+
 immer@^9.0.21:
   version "9.0.21"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.21.tgz#1e025ea31a40f24fb064f1fef23e931496330176"
@@ -5414,6 +5423,11 @@ javascript-lp-solver@0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/javascript-lp-solver/-/javascript-lp-solver-0.4.24.tgz#3bb5f8aa051f0bf04747e39130133a0f738f635c"
   integrity sha512-5edoDKnMrt/u3M6GnZKDDIPxOyFOg+WrwDv8mjNiMC2DePhy2H9/FFQgf4ggywaXT1utvkxusJcjQUER72cZmA==
+
+jotai@^2.12.5:
+  version "2.12.5"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.12.5.tgz#2decdf41dfcad5e4afc7278da81c45646d4ae8ad"
+  integrity sha512-G8m32HW3lSmcz/4mbqx0hgJIQ0ekndKWiYP7kWVKi0p6saLXdSoye+FZiOFyonnd7Q482LCzm8sMDl7Ar1NWDw==
 
 jpeg-js@^0.4.4:
   version "0.4.4"
