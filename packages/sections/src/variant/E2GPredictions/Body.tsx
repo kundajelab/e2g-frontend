@@ -1,19 +1,23 @@
 import { useQuery } from "@apollo/client";
-import { Box, Chip, IconButton } from "@mui/material";
-import { Link, SectionItem, Tooltip, OtTable } from "ui";
-import { Fragment } from "react";
+import { IconButton, Typography } from "@mui/material";
+import {
+  Link,
+  SectionItem,
+  Tooltip,
+  OtTable,
+  IGVBrowser,
+  IGVBrowserHandle,
+  ExportIGVSession,
+  ITrackInfo,
+} from "ui";
 import { definition } from "../E2GPredictions";
 import Description from "../E2GPredictions/Description";
 import E2G_PREDICTIONS_QUERY from "./E2GQuery.gql";
 import { Add, Remove } from "@mui/icons-material";
+import { atom, useAtom } from "jotai";
+import { useEffect, useMemo, useRef } from "react";
 
-function formatVariantConsequenceLabel(label) {
-  return label.replace(/_/g, " ");
-}
-
-function isNumber(value: any): boolean {
-  return typeof value === "number" && isFinite(value);
-}
+export const igvTracksSet = atom<Array<ITrackInfo>>([]);
 
 const tableColumns = (
   _variantId: string,
@@ -36,7 +40,7 @@ const tableColumns = (
       </Link>
     ),
     sortable: true,
-    accessorFn: (rowData) => rowData.targetGene.symbol,
+    accessorFn: rowData => rowData.targetGene.symbol,
   },
   {
     id: "score",
@@ -60,7 +64,11 @@ const tableColumns = (
         </div>
       );
       if (rowData.dataset.length > 25) {
-        return <Tooltip title={text} placement="top">{text}</Tooltip>;
+        return (
+          <Tooltip title={text} placement="top">
+            {text}
+          </Tooltip>
+        );
       }
       return text;
     },
@@ -174,8 +182,29 @@ type BodyProps = {
 };
 
 export function Body({ id, entity }: BodyProps) {
+  const igvBrowserRef = useRef<IGVBrowserHandle>(null);
   const variables = {
     variantId: id,
+  };
+  const [tracksSet, setTracksSet] = useAtom(igvTracksSet);
+  const locus = useMemo(() => {
+    const [chromosome, position] = id.split("_");
+    const intPosition = parseInt(position);
+    return `${chromosome}:${intPosition - 5000}-${intPosition + 5000}`;
+  }, [id]);
+
+  useEffect(() => {
+    setTracksSet([]); // This will clear the set on component mount
+  }, [setTracksSet]);
+
+  const addTrack = (trackInfo: ITrackInfo) => {
+    setTracksSet(prevTrackSet => Array.from(new Set(prevTrackSet).add(trackInfo)));
+  };
+
+  const removeTrack = (trackInfo: ITrackInfo) => {
+    setTracksSet(prevTrackSet => {
+      return prevTrackSet.filter(track => track.trackUrl !== trackInfo.trackUrl);
+    });
   };
 
   const request = useQuery(E2G_PREDICTIONS_QUERY, {
@@ -199,14 +228,37 @@ export function Body({ id, entity }: BodyProps) {
         sortedRows = structuredClone(request.data?.variant.enhancerGenePredictions);
         sortedRows?.sort((a, b) => b.score - a.score);
         return (
-          <OtTable
-            columns={tableColumns(id)}
-            rows={sortedRows}
-            dataDownloader
-            query={E2G_PREDICTIONS_QUERY.loc.source.body}
-            variables={variables}
-            loading={request.loading}
-          />
+          <>
+            <OtTable
+              columns={tableColumns(id, tracksSet, addTrack, removeTrack)}
+              rows={sortedRows}
+              dataDownloader
+              query={E2G_PREDICTIONS_QUERY.loc.source.body}
+              variables={variables}
+              loading={request.loading}
+              staticColumns={false}
+              staticRows={false}
+            />
+            <Typography variant="h6">IGV Browser for Enhancer-Gene Model Predictions
+            </Typography>
+            <Typography paragraph>
+              Select cell types to view in the Enhancer-Gene Model Predictions table above. See here
+              to explore more cell types.
+            </Typography>
+            <ExportIGVSession
+              igvBrowserRef={igvBrowserRef}
+              sessionData={null}
+              hideImport={true}
+              igvTracksSetAtom={igvTracksSet}
+            />
+            <IGVBrowser
+              key={`igv-browser-${id}`}
+              locus={locus}
+              variantId={id}
+              ref={igvBrowserRef}
+              igvTracksSetAtom={igvTracksSet}
+            />
+          </>
         );
       }}
     />
