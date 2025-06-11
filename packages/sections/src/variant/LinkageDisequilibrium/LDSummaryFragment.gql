@@ -1,3 +1,4 @@
 fragment LDSummaryFragment on Variant {
   id
+  linkageDisequilibriumsCount
 }

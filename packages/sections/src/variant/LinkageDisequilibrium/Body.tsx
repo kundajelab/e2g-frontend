@@ -123,7 +123,7 @@ export function Body({ id, entity }: BodyProps) {
       )}
       renderBody={() => {
         let sortedRows = [];
-        sortedRows = structuredClone(request.data?.variant.linkageDisequilibriums);
+        sortedRows = structuredClone(request.data?.variant.linkageDisequilibriums || []);
         sortedRows?.sort((a, b) => b.r2 - a.r2);
         return (
           <OtTable
