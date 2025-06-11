@@ -14,6 +14,9 @@ function VariantPage(): ReactElement {
 
   const { loading, data } = useQuery(VARIANT_PAGE_QUERY, {
     variables: { variantId: varId },
+    fetchPolicy: "cache-and-network",
+    notifyOnNetworkStatusChange: true,
+    errorPolicy: "all",
   });
 
   if (data && !data.variant) {
@@ -22,6 +25,7 @@ function VariantPage(): ReactElement {
 
   return (
     <BasePage
+      key={varId}
       title={`${varId} profile page`}
       description={`Annotation information for ${varId}`}
       location={location}
@@ -40,7 +44,7 @@ function VariantPage(): ReactElement {
             />
           </Tabs>
         </Box>
-        <Profile varId={varId} />
+        <Profile key={varId} varId={varId} />
       </>
     </BasePage>
   );
