@@ -40,3 +40,7 @@ yarn-error.log*
 .turbo
 # Local Netlify folder
 .netlify
+
+ssl/
+.env
+bundle-platform
