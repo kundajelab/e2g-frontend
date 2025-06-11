@@ -43,7 +43,7 @@ const summaries = [
   UniProtVariantsSummary,
   GWASCredibleSetsSummary,
   QTLCredibleSetsSummary,
-  LinkageDisequilibriumSummary,
+  // LinkageDisequilibriumSummary,
 ];
 
 const VARIANT = "variant";
@@ -75,7 +75,7 @@ function Profile({ varId }: ProfileProps) {
 
       <SummaryContainer>
         <E2GSummary />
-        <LinkageDisequilibriumSummary />
+        <LinkageDisequilibriumSummary variantId={varId} />
         <VariantEffectSummary />
         {/* <ProteinStructureSummary /> */}
         <VariantEffectPredictorSummary />

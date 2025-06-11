@@ -55,7 +55,7 @@ const tableColumns = (
       const text = (
         <div style={{ maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis" }}>
           {rowData.dataset.startsWith("ENCSR") ? (
-            <Link to={`https://www.encodeproject.org/experiments/${rowData.dataset}`} external>
+            <Link to={`https://www.encodeproject.org/experiments/${rowData.dataset}`} external newTab>
               {rowData.dataset}
             </Link>
           ) : (
