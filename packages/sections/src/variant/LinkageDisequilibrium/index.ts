@@ -4,6 +4,6 @@ export const definition = {
   name: "Linkage disequilibriums",
   shortName: "LD",
   hasData: data => {
-    return data.linkageDisequilibriumsCount > 0 || data.variant.linkageDisequilibriumsCount > 0;
+    return data?.linkageDisequilibriumsCount > 0 || data?.variant?.linkageDisequilibriumsCount > 0;
   },
 };
