@@ -1,9 +1,6 @@
-[![CI](https://github.com/opentargets/ot-ui-apps/actions/workflows/ci.yaml/badge.svg)](https://github.com/opentargets/ot-ui-apps/actions/workflows/ci.yaml)
-[![Development build](https://github.com/opentargets/ot-ui-apps/actions/workflows/publish.yaml/badge.svg)](https://github.com/opentargets/ot-ui-apps/actions/workflows/publish.yaml)
+# Enhancer2Gene (E2G) Portal
 
-# Open Targets Apps
-
-This repository holds the Open Targets web applications.
+This repository holds the Enhancer2Gene (E2G) portal.
 
 ## Required stack
 
@@ -12,15 +9,11 @@ This repository holds the Open Targets web applications.
 
 ## Running development
 
-This project contains the [Platform](https://platform.opentargets.org/) web application. To run in development mode, you can run: `yarn dev` in the root directory.
-
-To run only Platform `yarn dev:platfrom`
+This project contains the [E2G](https://e2g.stanford.edu/) web application. To run in development mode, you can run: `yarn dev` in the root directory.
 
 ## Building production-ready bundle
 
 From the root directory run: `yarn build`. This will generate a production-ready bundle.
-
-As same as development, you can run `yarn build:platform` to scope the build only for specific applications.
 
 ## Copyright
 
