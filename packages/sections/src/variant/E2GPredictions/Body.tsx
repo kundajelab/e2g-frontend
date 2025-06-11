@@ -239,10 +239,10 @@ export function Body({ id, entity }: BodyProps) {
               staticColumns={false}
               staticRows={false}
             />
-            <Typography variant="h6">IGV Browser for Enhancer-Gene Model Predictions
+            <Typography variant="h6">IGV browser for enhancer-gene model predictions
             </Typography>
             <Typography paragraph>
-              Select cell types to view in the Enhancer-Gene Model Predictions table above. See here
+              Select cell types to view in the enhancer-gene model predictions table above. See here
               to explore more cell types.
             </Typography>
             <ExportIGVSession
