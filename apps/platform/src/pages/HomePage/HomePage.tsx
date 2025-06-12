@@ -79,7 +79,7 @@ function AboutPublic(): JSX.Element {
   return (
     <>
       <Typography paragraph>
-        The Enhancer2Gene Platform is a portal built on top of the Open Targets Platform that supports understanding functional effects of variants based on predictions about enhancer-gene regulatory interactions.
+        The Enhancer2Gene Platform is a portal built on top of the <Link to="https://platform.opentargets.org" external>Open Targets Platform</Link> that supports understanding functional effects of variants based on predictions about enhancer-gene regulatory interactions.
       </Typography>
 
       {/* <Typography paragraph>
