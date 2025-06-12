@@ -83,7 +83,7 @@ function AboutPublic(): JSX.Element {
       </Typography>
 
       <Typography paragraph>
-        This portal extends the Open Targets Platform with two specific functionalities:
+        This portal extends the <Link to="https://platform.opentargets.org" external newTab>Open Targets Platform</Link> with two specific functionalities:
       </Typography>
 
       <ol>
@@ -175,7 +175,7 @@ function HomePage(): JSX.Element {
           <GlobalSearch isHomePage />
           {/* Search examples */}
           <HomePageSuggestions />
-          <Version releaseNotesURL={releaseNotesURL} />
+          {/* <Version releaseNotesURL={releaseNotesURL} /> */}
           <Divider style={{ marginTop: "25px", marginBottom: "25px" }}>
             <strong>OR</strong>
           </Divider>
