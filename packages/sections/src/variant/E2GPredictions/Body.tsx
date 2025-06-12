@@ -242,8 +242,7 @@ export function Body({ id, entity }: BodyProps) {
             <Typography variant="h6">IGV browser for enhancer-gene model predictions
             </Typography>
             <Typography paragraph>
-              Select cell types to view in the enhancer-gene model predictions table above. See here
-              to explore more cell types.
+              Select cell types in the table above to view browser tracks for. See <Link to="/igv">here</Link> to explore more cell types.
             </Typography>
             <ExportIGVSession
               igvBrowserRef={igvBrowserRef}
