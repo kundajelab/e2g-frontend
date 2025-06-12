@@ -26,6 +26,70 @@ const tableColumns = (
   removeTrack: (track: ITrackInfo) => void = () => {}
 ) => [
   {
+    id: "datatrack",
+    label: "Add to IGV",
+    renderCell: rowData => {
+      if (rowData.datatrack) {
+        const tracks: ITrackInfo[] = [
+          {
+            cellTypeID: rowData.cellType,
+            cellTypeName: rowData.cellType,
+            study: rowData.dataset,
+            studyUrl: "",
+            trackUrl: rowData.datatrack.e2gPredictionsUrl || "",
+            trackType: "E2G Predictions",
+            model: rowData.model,
+          },
+
+          {
+            cellTypeID: rowData.cellType,
+            cellTypeName: rowData.cellType,
+            study: rowData.dataset,
+            studyUrl: "",
+            trackUrl: rowData.datatrack.atacSignalUrl || "",
+            trackType: "ATAC Signal",
+            model: rowData.model,
+          },
+          {
+            cellTypeID: rowData.cellType,
+            cellTypeName: rowData.cellType,
+            study: rowData.dataset,
+            studyUrl: "",
+            trackUrl: rowData.datatrack.dnaseSignalUrl || "",
+            trackType: "DNase Signal",
+            model: rowData.model,
+          },
+          {
+            cellTypeID: rowData.cellType,
+            cellTypeName: rowData.cellType,
+            study: rowData.dataset,
+            studyUrl: "",
+            trackUrl: rowData.datatrack.elementsUrl || "",
+            trackType: "Elements",
+            model: rowData.model,
+          },
+        ].filter(track => track.trackUrl !== "");
+
+        const isTrackAdded = igvTracks.some(track => track.trackUrl === tracks[0].trackUrl);
+
+        const addTracks = () => {
+          tracks.forEach(track => addTrack(track));
+        };
+
+        const removeTracks = () => {
+          tracks.forEach(track => removeTrack(track));
+        };
+
+        return (
+          <IconButton onClick={() => (isTrackAdded ? removeTracks() : addTracks())}>
+            {isTrackAdded ? <Remove /> : <Add />}
+          </IconButton>
+        );
+      }
+      return null;
+    },
+  },
+  {
     id: "cellType",
     label: "Cell Type",
     renderCell: rowData => rowData.cellType,
@@ -109,71 +173,7 @@ const tableColumns = (
     label: "E-G Distance",
     renderCell: rowData => rowData.enhancerToGeneDistance,
     sortable: true,
-  },
-  {
-    id: "datatrack",
-    label: "Add to IGV",
-    renderCell: rowData => {
-      if (rowData.datatrack) {
-        const tracks: ITrackInfo[] = [
-          {
-            cellTypeID: rowData.cellType,
-            cellTypeName: rowData.cellType,
-            study: rowData.dataset,
-            studyUrl: "",
-            trackUrl: rowData.datatrack.e2gPredictionsUrl || "",
-            trackType: "E2G Predictions",
-            model: rowData.model,
-          },
-
-          {
-            cellTypeID: rowData.cellType,
-            cellTypeName: rowData.cellType,
-            study: rowData.dataset,
-            studyUrl: "",
-            trackUrl: rowData.datatrack.atacSignalUrl || "",
-            trackType: "ATAC Signal",
-            model: rowData.model,
-          },
-          {
-            cellTypeID: rowData.cellType,
-            cellTypeName: rowData.cellType,
-            study: rowData.dataset,
-            studyUrl: "",
-            trackUrl: rowData.datatrack.dnaseSignalUrl || "",
-            trackType: "DNase Signal",
-            model: rowData.model,
-          },
-          {
-            cellTypeID: rowData.cellType,
-            cellTypeName: rowData.cellType,
-            study: rowData.dataset,
-            studyUrl: "",
-            trackUrl: rowData.datatrack.elementsUrl || "",
-            trackType: "Elements",
-            model: rowData.model,
-          },
-        ].filter(track => track.trackUrl !== "");
-
-        const isTrackAdded = igvTracks.some(track => track.trackUrl === tracks[0].trackUrl);
-
-        const addTracks = () => {
-          tracks.forEach(track => addTrack(track));
-        };
-
-        const removeTracks = () => {
-          tracks.forEach(track => removeTrack(track));
-        };
-
-        return (
-          <IconButton onClick={() => (isTrackAdded ? removeTracks() : addTracks())}>
-            {isTrackAdded ? <Remove /> : <Add />}
-          </IconButton>
-        );
-      }
-      return null;
-    },
-  },
+  }
 ];
 
 type BodyProps = {

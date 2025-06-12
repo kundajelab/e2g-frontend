@@ -120,6 +120,26 @@ const DataTrackTable: React.FC<DataTableProps> = ({ loading, error, data, filena
   // Table is now defined here
   const tableColumns = [
     {
+      id: "addAll",
+      label: "Add Tracks",
+      renderCell: (rowData: any) => {
+        const isTrackAdded = Array.from(tracksSet).some(
+          t => t.study === rowData.study && t.cellTypeID === rowData.cellTypeId
+        );
+        return (
+          <IconButton
+            onClick={() =>
+              isTrackAdded
+                ? removeAllTracksForRow(rowData.study, rowData.cellTypeId)
+                : addAllTracksForRow(rowData.study, rowData.cellTypeId)
+            }
+          >
+            {isTrackAdded ? <RemoveIcon /> : <AddIcon />}
+          </IconButton>
+        );
+      },
+    },
+    {
       id: "cellType",
       label: "Cell Type",
       renderCell: (rowData: any) => (
@@ -258,26 +278,6 @@ const DataTrackTable: React.FC<DataTableProps> = ({ loading, error, data, filena
       ),
     },
     */
-    {
-      id: "addAll",
-      label: "Data Tracks",
-      renderCell: (rowData: any) => {
-        const isTrackAdded = Array.from(tracksSet).some(
-          t => t.study === rowData.study && t.cellTypeID === rowData.cellTypeId
-        );
-        return (
-          <IconButton
-            onClick={() =>
-              isTrackAdded
-                ? removeAllTracksForRow(rowData.study, rowData.cellTypeId)
-                : addAllTracksForRow(rowData.study, rowData.cellTypeId)
-            }
-          >
-            {isTrackAdded ? <RemoveIcon /> : <AddIcon />}
-          </IconButton>
-        );
-      },
-    },
   ];
 
   return (
