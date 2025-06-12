@@ -186,10 +186,10 @@ export const initialResponse = {
 };
 
 // App Metadata
-export const appTitle = "Open Targets Platform";
+export const appTitle = "E2G";
 export const appDescription =
-  "The Open Targets Platform is a data integration tool that supports systematic drug target identification and prioritisation";
-export const appCanonicalUrl = "https://platform.opentargets.org";
+  "E2G is a tool for exploring functional effects of variants via predicted enhancer-gene interactions";
+export const appCanonicalUrl = "https://e2g.stanford.edu";
 
 // Chunk Sizes
 export const tableChunkSize = 100;
