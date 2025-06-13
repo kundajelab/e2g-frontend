@@ -25,6 +25,7 @@ const tableColumns = (
     {
       id: 'variantId',
       label: 'Variant',
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(
           rowData,
@@ -39,36 +40,43 @@ const tableColumns = (
     {
       id: 'variantRsId',
       label: 'rsId',
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(rowData, rsIds.includes(rowData.variantRsId) ? `${rowData.variantRsId} (self)` : rowData.variantRsId),
     },
     {
       id: 'position',
       label: 'Position',
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(rowData, rowData.variantPosition),
     },
     {
       id: 'r2',
       label: 'LD (r²)',
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(rowData, rowData.r2),
     },
     {
       id: 'dprime',
       label: "LD (D')",
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(rowData, rowData.dPrime),
     },
     {
       id: 'mostSevereConsequence',
       label: 'Most Severe Consequence',
+      sortable: true,
       renderCell: (rowData) =>
         conditionalBold(rowData, rowData.mostSevereConsequence),
     },
     {
       id: 'egCellTypes',
       label: '# Cell types with E-G prediction',
+      sortable: true,
+      accessorFn: (rowData) => rowData.egCellTypes.length,
       renderCell: (rowData) => {
         const cellTypeSet = new Set(rowData.egCellTypes);
         return conditionalBold(
@@ -82,6 +90,8 @@ const tableColumns = (
     {
       id: 'egGenes',
       label: '# Genes with E-G prediction',
+      sortable: true,
+      accessorFn: (rowData) => rowData.egGenes.length,
       renderCell: (rowData) => {
         const geneSet = new Set(rowData.egGenes);
         return conditionalBold(
