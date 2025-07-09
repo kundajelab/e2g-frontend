@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { SearchProvider, PrivateRoute, OTConfigurationProvider } from "ui";
+import { SearchProvider, PrivateRoute, OTConfigurationProvider, FromGeneticsModal } from "ui";
 import { getConfig } from "@ot/config";
 
 import SEARCH_QUERY from "./components/Search/SearchQuery.gql";
@@ -33,15 +33,14 @@ function App(): ReactElement {
         searchPlaceholder="Search for a variant to find predicted enhancers and target genes..."
       >
         <Router>
+          <FromGeneticsModal />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/api" element={<APIPage />} />
             <Route path="/igv" element={<IGVPage />} />
             <Route path="/ingestion" element={<IngestionPage />} />
             <Route path="/search" element={<SearchPage />} />
-
             <Route path="/downloads/*" element={<DownloadsPage />} />
-
             <Route path="/target/:ensgId/*" element={<TargetPage />} />
             <Route path="/disease/:efoId/*" element={<DiseasePage />} />
             <Route path="/evidence/:ensgId/:efoId/*" element={<EvidencePage />} />
