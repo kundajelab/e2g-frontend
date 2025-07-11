@@ -37,6 +37,9 @@ export type OtTableProps = {
   staticColumns: boolean;
   staticRows: boolean;
   pageSize: number;
+  getFilteredRows: boolean; // Temporary declarations as booleans
+  getEnteredRow: boolean;
+  getExitedRow: boolean;
 };
 
 export type loadingTableRows = {

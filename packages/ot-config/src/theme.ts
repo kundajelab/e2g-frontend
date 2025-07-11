@@ -187,7 +187,7 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
-    MuiChip: {
+    MuiRadio: {
       defaultProps: {
         disableRipple: true,
       },

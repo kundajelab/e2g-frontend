@@ -27,6 +27,7 @@ import HomeBox from "./HomeBox";
 import Splash from "./Splash";
 import Version from "./Version";
 import HomePageSuggestions from "./HomePageSuggestions";
+import ShouldAccessPPP from "../../components/ShouldAccessPPP";
 
 const config = getConfig();
 
@@ -164,6 +165,8 @@ function HomePage(): JSX.Element {
 
   return (
     <>
+      <ShouldAccessPPP />
+
       <Helmet title={"E2G"}>
         <meta name="description" content={appDescription} />
         <link rel="canonical" href={appCanonicalUrl} />
