@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useAtom } from "jotai";
-import { IGVBrowserHandle } from "./IGVBrowser";
+import IGVBrowser, { IGVBrowserHandle } from "./IGVBrowser";
 import { BGZip } from "igv-utils";
 
 const exclusionFn = (track: any) => {
@@ -68,6 +68,7 @@ const ExportIGVSession: React.FC<{
   };
 
   const importSessionFromJSON = (session: any) => {
+    igvBrowserRef.current?.getBrowser()?.search(session.locus);
     const importedTracks = [];
     for (const track of session.tracks) {
       if (exclusionFn(track)) {
