@@ -68,7 +68,6 @@ const ExportIGVSession: React.FC<{
   };
 
   const importSessionFromJSON = (session: any) => {
-    igvBrowserRef.current?.getBrowser()?.search(session.locus);
     const importedTracks = [];
     for (const track of session.tracks) {
       if (exclusionFn(track)) {
@@ -90,6 +89,11 @@ const ExportIGVSession: React.FC<{
     // Restore ROIs if they exist in the session
     if (session.roi && igvBrowserRef.current) {
       igvBrowserRef.current.setROI(session.roi);
+    }
+    
+    // Restore the Locus Session Data (Locus should always be present)
+    if (session.locus && igvBrowserRef.current) {
+      igvBrowserRef.current.setLocus(session.locus);
     }
   };
 
