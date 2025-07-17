@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useAtom } from "jotai";
-import { IGVBrowserHandle } from "./IGVBrowser";
+import IGVBrowser, { IGVBrowserHandle } from "./IGVBrowser";
 import { BGZip } from "igv-utils";
 
 const exclusionFn = (track: any) => {
@@ -89,6 +89,11 @@ const ExportIGVSession: React.FC<{
     // Restore ROIs if they exist in the session
     if (session.roi && igvBrowserRef.current) {
       igvBrowserRef.current.setROI(session.roi);
+    }
+    
+    // Restore the Locus Session Data (Locus should always be present)
+    if (session.locus && igvBrowserRef.current) {
+      igvBrowserRef.current.setLocus(session.locus);
     }
   };
 

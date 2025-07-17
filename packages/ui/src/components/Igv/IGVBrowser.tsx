@@ -8,6 +8,7 @@ import ITrackInfo from "./ITrackInfo";
 export interface IGVBrowserHandle {
   getBrowser: () => any;
   setROI: (roi: any[]) => void;
+  setLocus: (locus: any[]) => void;
 }
 
 const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: string; igvTracksSetAtom: any }>(
@@ -19,6 +20,7 @@ const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: str
     const browserRef = useRef<any>(null);
     const prevTrackSet = useRef<ITrackInfo[]>(tracksSet);
     const pendingROIRef = useRef<any[] | null>(null);
+    const pendingLocusRef = useRef<any[] | null>(null);
 
     // Function to apply ROI data to the browser
     const applyROI = (roi: any[]) => {
@@ -38,9 +40,25 @@ const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: str
       return true;
     };
 
+    // Function to apply Locus Data to the browser
+    const applyLocus = (locus: any[]) => {
+      if (!browserRef.current || !browserInitialized) return false;
+      browserRef.current.search(locus);
+      return true;
+    };
+
     // Expose the browser instance to parent components
     useImperativeHandle(ref, () => ({
       getBrowser: () => browserRef.current,
+      setLocus: (locus: any[]) => {
+        // Try to apply Locus immediately
+        const applied = applyLocus(locus);
+
+        // If not applied (browser not ready), queue it
+        if (!applied) {
+          pendingLocusRef.current = locus;
+        }
+      },
       setROI: (roi: any[]) => {
         // Try to apply ROI immediately
         const applied = applyROI(roi);
@@ -52,11 +70,13 @@ const IGVBrowser = forwardRef<IGVBrowserHandle, { locus: string; variantId?: str
       },
     }));
 
-    // Effect to apply pending ROI once browser is initialized
+    // Effect to apply pending ROI and Locus once browser is initialized
     useEffect(() => {
-      if (browserInitialized && browserRef.current && pendingROIRef.current) {
+      if (browserInitialized && browserRef.current && pendingROIRef.current && pendingLocusRef.current) {
         applyROI(pendingROIRef.current);
+        applyLocus(pendingLocusRef.current)
         pendingROIRef.current = null;
+        pendingLocusRef.current = null;
       }
     }, [browserInitialized]);
 
