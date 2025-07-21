@@ -33,7 +33,7 @@ function HomePageSuggestions() {
   const { searchSuggestions } = useSearchState() as { searchSuggestions: SearchSuggestion[] };
   return (
     <Grid container justifyContent="center" gap={1.5} sx={{ mt: 4 }}>
-      {searchSuggestions.map((suggestion) => (
+      {searchSuggestions.map(suggestion => (
         <Link asyncTooltip to={`/variant/${suggestion.id}`}>
           <StyledChip
             sx={{ pl: 1, borderRadius: 2 }}

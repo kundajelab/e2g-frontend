@@ -63,12 +63,12 @@ function ProfileHeader() {
                   <Link key={gene.id} to={`/target/${gene.id}`}>
                     {gene.symbol}
                   </Link>
-                  {i <
-                    data.variant.uniqueEnhancerGenePredictionTargetGenes!.length -
-                      1 && <span>, </span>}
+                  {i < data.variant.uniqueEnhancerGenePredictionTargetGenes!.length - 1 && (
+                    <span>, </span>
+                  )}
                 </Fragment>
               ))
-            : 'N/A'}
+            : "N/A"}
         </Typography>
       </Box>
 

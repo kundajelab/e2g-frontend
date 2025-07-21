@@ -9,7 +9,7 @@ type DescriptionProps = {
 function Description({ variantId, referenceAllele, alternateAllele }: DescriptionProps) {
   return (
     <>
-      Genes predicted to be regulated by enhancers overlapping {" "}
+      Genes predicted to be regulated by enhancers overlapping{" "}
       <strong>
         <DisplayVariantId
           variantId={variantId}

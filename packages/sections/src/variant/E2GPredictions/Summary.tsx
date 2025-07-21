@@ -7,10 +7,15 @@ function Summary() {
   const request = usePlatformApi(E2G_SUMMARY);
 
   let subText = "";
-  if (!request.data?.enhancerGenePredictionsCount || request.data?.enhancerGenePredictionsCount === 0) {
+  if (
+    !request.data?.enhancerGenePredictionsCount ||
+    request.data?.enhancerGenePredictionsCount === 0
+  ) {
     subText = "No predictions found";
   } else {
-    subText = `${request.data?.enhancerGenePredictionsCount} ${request.data?.enhancerGenePredictionsCount === 1 ? "prediction" : "predictions"}`;
+    subText = `${request.data?.enhancerGenePredictionsCount} ${
+      request.data?.enhancerGenePredictionsCount === 1 ? "prediction" : "predictions"
+    }`;
   }
 
   return <SummaryItem definition={definition} request={request} subText={subText} />;
