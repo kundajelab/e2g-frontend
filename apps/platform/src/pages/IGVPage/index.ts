@@ -1,1 +1,1 @@
-export { default } from './IGVPage';
+export { default } from "./IGVPage";

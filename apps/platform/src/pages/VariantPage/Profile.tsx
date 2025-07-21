@@ -14,7 +14,7 @@ import VariantEffectSummary from "sections/src/variant/VariantEffect/Summary";
 import VariantEffectPredictorSummary from "sections/src/variant/VariantEffectPredictor/Summary";
 import E2GSummary from "sections/src/variant/E2GPredictions/Summary";
 import EVASummary from "sections/src/variant/EVA/Summary";
-import LinkageDisequilibriumSummary from "sections/src/variant/LinkageDisequilibrium/Summary";  
+import LinkageDisequilibriumSummary from "sections/src/variant/LinkageDisequilibrium/Summary";
 import UniProtVariantsSummary from "sections/src/variant/UniProtVariants/Summary";
 import GWASCredibleSetsSummary from "sections/src/variant/GWASCredibleSets/Summary";
 import QTLCredibleSetsSummary from "sections/src/variant/QTLCredibleSets/Summary";
@@ -33,7 +33,9 @@ const UniProtVariantsSection = lazy(() => import("sections/src/variant/UniProtVa
 const GWASCredibleSetsSection = lazy(() => import("sections/src/variant/GWASCredibleSets/Body"));
 const QTLCredibleSetsSection = lazy(() => import("sections/src/variant/QTLCredibleSets/Body"));
 const E2GPredictionsSection = lazy(() => import("sections/src/variant/E2GPredictions/Body"));
-const LinkageDisequilibriumSection = lazy(() => import("sections/src/variant/LinkageDisequilibrium/Body"));
+const LinkageDisequilibriumSection = lazy(
+  () => import("sections/src/variant/LinkageDisequilibrium/Body")
+);
 
 const summaries = [
   MolecularStructureSummary,

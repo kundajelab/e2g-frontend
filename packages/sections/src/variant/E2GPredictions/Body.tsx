@@ -119,7 +119,11 @@ const tableColumns = (
       const text = (
         <div style={{ maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis" }}>
           {rowData.dataset.startsWith("ENCSR") ? (
-            <Link to={`https://www.encodeproject.org/experiments/${rowData.dataset}`} external newTab>
+            <Link
+              to={`https://www.encodeproject.org/experiments/${rowData.dataset}`}
+              external
+              newTab
+            >
               {rowData.dataset}
             </Link>
           ) : (
@@ -173,7 +177,7 @@ const tableColumns = (
     label: "E-G Distance",
     renderCell: rowData => rowData.enhancerToGeneDistance,
     sortable: true,
-  }
+  },
 ];
 
 type BodyProps = {
@@ -239,10 +243,10 @@ export function Body({ id, entity }: BodyProps) {
               staticColumns={false}
               staticRows={false}
             />
-            <Typography variant="h6">IGV browser for enhancer-gene model predictions
-            </Typography>
+            <Typography variant="h6">IGV browser for enhancer-gene model predictions</Typography>
             <Typography paragraph>
-              Select cell types in the table above to view browser tracks for. See <Link to="/igv">here</Link> to explore more cell types.
+              Select cell types in the table above to view browser tracks for. See{" "}
+              <Link to="/igv">here</Link> to explore more cell types.
             </Typography>
             <ExportIGVSession
               igvBrowserRef={igvBrowserRef}

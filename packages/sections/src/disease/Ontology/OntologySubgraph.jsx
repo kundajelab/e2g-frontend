@@ -11,29 +11,28 @@ const useStyles = makeStyles({
   },
 });
 
-
-const buildDag = (data) => [
+const buildDag = data => [
   {
     id: data.id,
     name: data.name,
     parentIds: data.parents.map(parent => parent.id),
     isTerapeuticArea: data.isTherapeuticArea,
-    nodeType: 'anchor',
+    nodeType: "anchor",
   },
   ...data.children.map(child => ({
     id: child.id,
     name: child.name,
     parentIds: [data.id],
     isTerapeuticArea: data.isTherapeuticArea,
-    nodeType: 'child',
+    nodeType: "child",
   })),
   ...data.resolvedAncestors.map(ancestor => ({
     id: ancestor.id,
     name: ancestor.name,
     parentIds: ancestor.parents.map(parent => parent.id),
     isTerapeuticArea: data.isTherapeuticArea,
-    nodeType: 'ancestor',
-  }))
+    nodeType: "ancestor",
+  })),
 ];
 
 const getMaxLayerCount = dag => {
@@ -41,13 +40,13 @@ const getMaxLayerCount = dag => {
 
   const layerCounts = {};
 
-  const addToLayer = layer => layerCounts[layer] = (layerCounts[layer] || 0) + 1;
+  const addToLayer = layer => (layerCounts[layer] = (layerCounts[layer] || 0) + 1);
 
-  dag.descendants().forEach(n => addToLayer(n['layer']));
-  dag.links().forEach(l => l.points.forEach((_, i) => addToLayer(l.source['layer'] + i + 1)));
+  dag.descendants().forEach(n => addToLayer(n["layer"]));
+  dag.links().forEach(l => l.points.forEach((_, i) => addToLayer(l.source["layer"] + i + 1)));
 
   return Math.max(...Object.values(layerCounts));
-}
+};
 
 const textWithEllipsis = (text, threshold) =>
   text.length <= threshold ? text : `${text.slice(0, threshold)}...`;

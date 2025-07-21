@@ -11,96 +11,113 @@ type TableColumn<T> = {
   renderCell?: (rowData: T) => React.ReactNode;
 };
 
-const tableColumns = (
-  rsIds: string[],
-  curVariantId: string
-) => {
-  const conditionalBold = (
-    rowData,
-    text: React.ReactNode
-  ) => {
+const tableColumns = (rsIds: string[], curVariantId: string) => {
+  const conditionalBold = (rowData, text: React.ReactNode) => {
     return rsIds.includes(rowData.variantRsId) ? <b>{text}</b> : text;
   };
   return [
     {
-      id: 'variantId',
-      label: 'Variant',
+      id: "variantId",
+      label: "Variant",
       sortable: true,
-      renderCell: (rowData) =>
+      renderCell: rowData =>
         conditionalBold(
           rowData,
           <div>
             <Link key={rowData.variantId} to={`/variant/${rowData.variantId}`}>
               {rowData.variantId}
             </Link>
-            {curVariantId === rowData.variantId ? ' (self)' : ''}
+            {curVariantId === rowData.variantId ? " (self)" : ""}
           </div>
         ),
     },
     {
-      id: 'variantRsId',
-      label: 'rsId',
+      id: "variantRsId",
+      label: "rsId",
       sortable: true,
-      renderCell: (rowData) =>
-        conditionalBold(rowData, rsIds.includes(rowData.variantRsId) ? `${rowData.variantRsId} (self)` : rowData.variantRsId),
+      renderCell: rowData =>
+        conditionalBold(
+          rowData,
+          rsIds.includes(rowData.variantRsId)
+            ? `${rowData.variantRsId} (self)`
+            : rowData.variantRsId
+        ),
     },
     {
-      id: 'position',
-      label: 'Position',
+      id: "position",
+      label: "Position",
       sortable: true,
-      renderCell: (rowData) =>
-        conditionalBold(rowData, rowData.variantPosition),
+      renderCell: rowData => conditionalBold(rowData, rowData.variantPosition),
     },
     {
-      id: 'r2',
-      label: 'LD (r²)',
+      id: "r2",
+      label: "LD (r²)",
       sortable: true,
-      renderCell: (rowData) =>
-        conditionalBold(rowData, rowData.r2),
+      renderCell: rowData => conditionalBold(rowData, rowData.r2),
     },
     {
-      id: 'dprime',
+      id: "dprime",
       label: "LD (D')",
       sortable: true,
-      renderCell: (rowData) =>
-        conditionalBold(rowData, rowData.dPrime),
+      renderCell: rowData => conditionalBold(rowData, rowData.dPrime),
     },
     {
-      id: 'mostSevereConsequence',
-      label: 'Most Severe Consequence',
+      id: "mostSevereConsequence",
+      label: "Most Severe Consequence",
       sortable: true,
-      renderCell: (rowData) =>
-        conditionalBold(rowData, rowData.mostSevereConsequence),
+      renderCell: rowData => conditionalBold(rowData, rowData.mostSevereConsequence),
     },
     {
-      id: 'egCellTypes',
-      label: '# Cell types with E-G prediction',
+      id: "egCellTypes",
+      label: "# Cell types with E-G prediction",
       sortable: true,
-      accessorFn: (rowData) => rowData.egCellTypes.length,
-      renderCell: (rowData) => {
+      accessorFn: rowData => rowData.egCellTypes.length,
+      renderCell: rowData => {
         const cellTypeSet = new Set(rowData.egCellTypes);
         return conditionalBold(
           rowData,
-          <Tooltip title={<ul style={{ margin: 0, paddingLeft: 0, listStylePosition: 'inside' }}>{Array.from(cellTypeSet).sort((a, b) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase())).map(cellType => <li key={cellType}>{cellType}</li>)}</ul>} placement="bottom">
+          <Tooltip
+            title={
+              <ul style={{ margin: 0, paddingLeft: 0, listStylePosition: "inside" }}>
+                {Array.from(cellTypeSet)
+                  .sort((a, b) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase()))
+                  .map(cellType => (
+                    <li key={cellType}>{cellType}</li>
+                  ))}
+              </ul>
+            }
+            placement="bottom"
+          >
             <div>{cellTypeSet.size}</div>
           </Tooltip>
-        )
-      }
+        );
+      },
     },
     {
-      id: 'egGenes',
-      label: '# Genes with E-G prediction',
+      id: "egGenes",
+      label: "# Genes with E-G prediction",
       sortable: true,
-      accessorFn: (rowData) => rowData.egGenes.length,
-      renderCell: (rowData) => {
+      accessorFn: rowData => rowData.egGenes.length,
+      renderCell: rowData => {
         const geneSet = new Set(rowData.egGenes);
         return conditionalBold(
           rowData,
-          <Tooltip title={<div>{Array.from(geneSet).sort((a, b) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase())).map(gene => <div key={gene}>{gene}</div>)}</div>} placement="bottom">
+          <Tooltip
+            title={
+              <div>
+                {Array.from(geneSet)
+                  .sort((a, b) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase()))
+                  .map(gene => (
+                    <div key={gene}>{gene}</div>
+                  ))}
+              </div>
+            }
+            placement="bottom"
+          >
             <div>{geneSet.size}</div>
           </Tooltip>
-        )
-      }
+        );
+      },
     },
   ];
 };

@@ -1,1 +1,1 @@
-export { default } from './IngestionPage';
+export { default } from "./IngestionPage";

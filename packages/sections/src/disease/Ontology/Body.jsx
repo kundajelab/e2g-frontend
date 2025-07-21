@@ -19,12 +19,7 @@ function Body({ id: efoId, label, entity }) {
       request={request}
       showContentLoading={true}
       renderDescription={() => <Description name={label} />}
-      renderBody={() =>
-        <OntologySubgraph
-          name={label}
-          data={request.data?.disease}
-        />
-      }
+      renderBody={() => <OntologySubgraph name={label} data={request.data?.disease} />}
       chipText={label}
     />
   );

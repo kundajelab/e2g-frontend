@@ -80,24 +80,39 @@ function AboutPublic(): JSX.Element {
   return (
     <>
       <Typography paragraph>
-        The E2G Portal enables linking DNA variants to target genes via predictions about enhancer-gene regulatory interactions.
+        The E2G Portal enables linking DNA variants to target genes via predictions about
+        enhancer-gene regulatory interactions.
       </Typography>
 
       <Typography paragraph>
-        This portal extends the <Link to="https://platform.opentargets.org" external newTab>Open Targets Platform</Link> with two specific functionalities:
+        This portal extends the{" "}
+        <Link to="https://platform.opentargets.org" external newTab>
+          Open Targets Platform
+        </Link>{" "}
+        with two specific functionalities:
       </Typography>
 
       <ol>
         <li>
-          <strong>Query a variant and find predicted target genes.</strong>  On a variant page, the Enhancer-Gene Predictions table shows predicted enhancers that overlap the query variant. The Variants in Linkage Disequilibrium table shows enhancer overlaps for variants in LD with the query variant.
+          <strong>Query a variant and find predicted target genes.</strong> On a variant page, the
+          Enhancer-Gene Predictions table shows predicted enhancers that overlap the query variant.
+          The Variants in Linkage Disequilibrium table shows enhancer overlaps for variants in LD
+          with the query variant.
         </li>
         <li>
-          <strong>Browse E2G predictions across cell types.</strong> Visit the <Link to="/igv">genome browser</Link> page to explore enhancer-gene predictions across thousands of cell types and tissues.
+          <strong>Browse E2G predictions across cell types.</strong> Visit the{" "}
+          <Link to="/igv">genome browser</Link> page to explore enhancer-gene predictions across
+          thousands of cell types and tissues.
         </li>
       </ol>
 
       <Typography paragraph>
-        The rest of the portal’s data and interface are powered by the Open Targets Platform and its API, which are open-source and available on <Link to="https://github.com/opentargets/ot-ui-apps" external>GitHub</Link>.
+        The rest of the portal’s data and interface are powered by the Open Targets Platform and its
+        API, which are open-source and available on{" "}
+        <Link to="https://github.com/opentargets/ot-ui-apps" external>
+          GitHub
+        </Link>
+        .
       </Typography>
     </>
   );
@@ -135,21 +150,21 @@ function HelpBoxPanel({ fai, url, label, external = false }: HelpBoxPanelProps):
 
 const BROWSER_EXAMPLES = [
   {
-    label: 'ENCODE-rE2G in 1458 cell types and tissues from ENCODE (Gschwind* et al. 2025)',
-    url: 'https://www.biorxiv.org/content/10.1101/2023.11.09.563812v1',
+    label: "ENCODE-rE2G in 1458 cell types and tissues from ENCODE (Gschwind* et al. 2025)",
+    url: "https://www.biorxiv.org/content/10.1101/2023.11.09.563812v1",
   },
   {
-    label: 'scE2G in 46 cell types from cell lines, blood, and pancreas (Sheth*, Qiu* et al. 2025)',
-    url: 'https://www.biorxiv.org/content/10.1101/2024.11.23.624931v1',
+    label: "scE2G in 46 cell types from cell lines, blood, and pancreas (Sheth*, Qiu* et al. 2025)",
+    url: "https://www.biorxiv.org/content/10.1101/2024.11.23.624931v1",
   },
   {
-    label: 'scE2G in 90 cell types from the developing heart (Ma*, Conley* et al. 2025)',
-    url: 'https://pubmed.ncbi.nlm.nih.gov/39606363/',
+    label: "scE2G in 90 cell types from the developing heart (Ma*, Conley* et al. 2025)",
+    url: "https://pubmed.ncbi.nlm.nih.gov/39606363/",
   },
   {
-    label: 'scE2G in 10 cell types from the coronary artery (Amrute et al. 2024)',
-    url: 'https://www.medrxiv.org/content/10.1101/2024.11.13.24317257v1'
-  }
+    label: "scE2G in 10 cell types from the coronary artery (Amrute et al. 2024)",
+    url: "https://www.medrxiv.org/content/10.1101/2024.11.13.24317257v1",
+  },
 ];
 
 function HomePage(): JSX.Element {
@@ -183,31 +198,27 @@ function HomePage(): JSX.Element {
             <strong>OR</strong>
           </Divider>
           <Typography
-              style={{
-                marginTop: '25px',
-              }}
-              align="center"
-            >
-              Browse enhancer-gene predictions in <Link to="/igv">IGV</Link>:
-            </Typography>
-            <Grid
-              container
-              className={classes.examples}
-              justifyContent="space-around"
-            >
-              {BROWSER_EXAMPLES.map((d, i) => (
-                <Typography
-                  key={i}
-                  style={{ textAlign: 'center' }}
-                  className={classes.exampleLink}
-                  sx={{
-                    my: 1,
-                  }}
-                >
-                  <Link to={d.url}>{d.label}</Link>
-                </Typography>
-              ))}
-            </Grid>
+            style={{
+              marginTop: "25px",
+            }}
+            align="center"
+          >
+            Browse enhancer-gene predictions in <Link to="/igv">IGV</Link>:
+          </Typography>
+          <Grid container className={classes.examples} justifyContent="space-around">
+            {BROWSER_EXAMPLES.map((d, i) => (
+              <Typography
+                key={i}
+                style={{ textAlign: "center" }}
+                className={classes.exampleLink}
+                sx={{
+                  my: 1,
+                }}
+              >
+                <Link to={d.url}>{d.label}</Link>
+              </Typography>
+            ))}
+          </Grid>
         </HomeBox>
 
         {/* scroll down button */}
