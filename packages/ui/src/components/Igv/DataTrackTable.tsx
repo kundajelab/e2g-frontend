@@ -21,14 +21,6 @@ type DataTableProps = {
 const DataTrackTable: React.FC<DataTableProps> = ({ loading, error, data, filenameStem, igvTracksSetAtom }) => {
   const [tracksSet, setTracksSet] = useAtom(igvTracksSetAtom);
 
-  console.log("akdsfjlkdjflakdf");
-  console.log(tracksSet);
-  const getTrackSet = () => {
-    console.log("hijijiojoi");
-    console.log(tracksSet);
-    return tracksSet;
-  };
-
   // Add all tracks for the specific cellTypeId/study combination
   const addAllTracksForRow = (study: string, cellTypeId: string) => {
     setTracksSet(prevTrackSet => {

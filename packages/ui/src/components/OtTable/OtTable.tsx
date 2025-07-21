@@ -123,6 +123,7 @@ function OtTable({
   const table = useReactTable({
     data: tableData,
     columns: tableColumns,
+    autoResetPageIndex: false,
     filterFns: {
       searchFilterFn: searchFilter,
     },
