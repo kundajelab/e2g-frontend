@@ -1,10 +1,6 @@
 import React from "react";
 import { Link, OtTable } from "ui";
-import {
-  IconButton,
-  Tooltip,
-  Box,
-} from "@mui/material";
+import { IconButton, Tooltip, Box } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useAtom } from "jotai";
@@ -18,7 +14,13 @@ type DataTableProps = {
   igvTracksSetAtom: any;
 };
 
-const DataTrackTable: React.FC<DataTableProps> = ({ loading, error, data, filenameStem, igvTracksSetAtom }) => {
+const DataTrackTable: React.FC<DataTableProps> = ({
+  loading,
+  error,
+  data,
+  filenameStem,
+  igvTracksSetAtom,
+}) => {
   const [tracksSet, setTracksSet] = useAtom(igvTracksSetAtom);
 
   // Add all tracks for the specific cellTypeId/study combination

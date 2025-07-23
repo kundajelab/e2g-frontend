@@ -115,7 +115,8 @@ function AboutPublic(): JSX.Element {
         .
       </Typography>
       <Typography>
-        The E2G portal was made in collaboration between the Engreitz Lab and the Kundaje Lab by Riya Sinha and Angel Ochoa.
+        The E2G portal was made in collaboration between the Engreitz Lab and the Kundaje Lab by
+        Riya Sinha and Angel Ochoa.
       </Typography>
     </>
   );

@@ -12,7 +12,6 @@ const EXAMPLE = {
 };
 
 function FacetsHelpBlock({ entityToGet }: { entityToGet: ENTITY }): ReactElement {
-
   const [open, setOpen] = useState(false);
   return (
     <Box sx={{ display: "flex", alignItems: "center", my: 1 }}>

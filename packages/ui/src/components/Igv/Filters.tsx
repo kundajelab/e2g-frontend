@@ -1,5 +1,5 @@
-import React from 'react';
-import { Autocomplete, TextField, Box } from '@mui/material';
+import React from "react";
+import { Autocomplete, TextField, Box } from "@mui/material";
 
 interface FiltersProps {
   data: any[];
@@ -25,20 +25,22 @@ const Filters: React.FC<FiltersProps> = ({
   setSelectedModels,
 }) => {
   // Get unique values for each filter
-  const uniqueCellTypes = Array.from(new Set(data.map((track) => track.cellType)));
-  const uniqueCellTypeIds = Array.from(new Set(data.map((track) => track.cellTypeId)));
-  const uniqueStudies = Array.from(new Set(data.map((track) => track.study)));
-  const uniqueModels = Array.from(new Set(data.map((track) => track.modelType || '').filter(Boolean)));
+  const uniqueCellTypes = Array.from(new Set(data.map(track => track.cellType)));
+  const uniqueCellTypeIds = Array.from(new Set(data.map(track => track.cellTypeId)));
+  const uniqueStudies = Array.from(new Set(data.map(track => track.study)));
+  const uniqueModels = Array.from(
+    new Set(data.map(track => track.modelType || "").filter(Boolean))
+  );
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 2 }}>
       <Autocomplete
         multiple
         options={uniqueCellTypes}
         value={selectedCellTypes}
         freeSolo
         onChange={(_, newValue) => setSelectedCellTypes(newValue)}
-        renderInput={(params) => (
+        renderInput={params => (
           <TextField {...params} label="Search by Cell Type" variant="outlined" />
         )}
       />
@@ -48,9 +50,7 @@ const Filters: React.FC<FiltersProps> = ({
         options={uniqueStudies}
         value={selectedStudies}
         onChange={(_, newValue) => setSelectedStudies(newValue)}
-        renderInput={(params) => (
-          <TextField {...params} label="Filter by Study" variant="outlined" />
-        )}
+        renderInput={params => <TextField {...params} label="Filter by Study" variant="outlined" />}
       />
 
       <Autocomplete
@@ -58,9 +58,7 @@ const Filters: React.FC<FiltersProps> = ({
         options={uniqueModels}
         value={selectedModels}
         onChange={(_, newValue) => setSelectedModels(newValue)}
-        renderInput={(params) => (
-          <TextField {...params} label="Filter by Model" variant="outlined" />
-        )}
+        renderInput={params => <TextField {...params} label="Filter by Model" variant="outlined" />}
       />
     </Box>
   );

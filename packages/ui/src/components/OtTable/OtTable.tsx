@@ -113,8 +113,14 @@ function OtTable({
   const loadingCells = getLoadingCells(mappedColumns);
   const enableRowSelection = !!getSelectedRows || enableMultipleRowSelection;
 
-  const tableData = useMemo(() => (loading ? loadingRows : rows), [loading, ...(staticRows ? [] : [rows])]);
-  const tableColumns = useMemo(() => (loading ? loadingCells : mappedColumns), [loading, ...(staticColumns ? [] : [mappedColumns])]);
+  const tableData = useMemo(
+    () => (loading ? loadingRows : rows),
+    [loading, ...(staticRows ? [] : [rows])]
+  );
+  const tableColumns = useMemo(
+    () => (loading ? loadingCells : mappedColumns),
+    [loading, ...(staticColumns ? [] : [mappedColumns])]
+  );
 
   function getCellData(cell: Record<string, unknown>): ReactNode {
     return <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>;
@@ -135,8 +141,8 @@ function OtTable({
     initialState: {
       sorting: getDefaultSortObj(sortBy, order),
       pagination: {
-        pageSize: pageSize
-      }
+        pageSize: pageSize,
+      },
     },
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,

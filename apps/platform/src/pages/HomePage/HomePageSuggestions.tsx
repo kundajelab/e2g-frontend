@@ -34,7 +34,7 @@ const staticVariants: SearchSuggestion[] = [
   { id: "5_173860848_G_A", name: "rs875741" },
   { id: "4_142405561_T_G", name: "rs7696969" },
   { id: "1_99580690_T_G", name: "rs6702619" },
-  { id: "1_59169854_G_T", name: "rs658956"},
+  { id: "1_59169854_G_T", name: "rs658956" },
 ];
 
 function HomePageSuggestions() {
