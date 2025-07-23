@@ -58,12 +58,10 @@ export const searchSuggestions: SearchSuggestions = {
     { type: "suggestion", entity: "drug", name: "LYRICA", id: "CHEMBL1059" },
   ],
   variants: [
-    { type: "suggestion", entity: "variant", name: "rs7412", id: "19_44908822_C_T" },
-    { type: "suggestion", entity: "variant", name: "rs4129267", id: "1_154453788_C_T" },
-    { type: "suggestion", entity: "variant", name: "4_1804392_G_A", id: "4_1804392_G_A" },
-    { type: "suggestion", entity: "variant", name: "11_64600382_G_A", id: "11_64600382_G_A" },
-    { type: "suggestion", entity: "variant", name: "12_6333477_C_T", id: "12_6333477_C_T" },
-    { type: "suggestion", entity: "variant", name: "17_43093010_G_A", id: "17_43093010_G_A" },
+    { type: "suggestion", entity: "variant", name: "rs875741", id: "5_173860848_G_A" },
+    { type: "suggestion", entity: "variant", name: "rs7696969", id: "4_142405561_T_G" },
+    { type: "suggestion", entity: "variant", name: "rs6702619", id: "1_99580690_T_G" },
+    { type: "suggestion", entity: "variant", name: "rs658956", id: "1_59169854_G_T" },
   ],
   studies: [
     { type: "suggestion", entity: "study", name: "GCST90012877", id: "GCST90012877" },
