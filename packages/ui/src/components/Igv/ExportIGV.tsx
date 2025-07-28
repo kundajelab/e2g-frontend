@@ -90,7 +90,7 @@ const ExportIGVSession: React.FC<{
     if (session.roi && igvBrowserRef.current) {
       igvBrowserRef.current.setROI(session.roi);
     }
-    
+
     // Restore the Locus Session Data (Locus should always be present)
     if (session.locus && igvBrowserRef.current) {
       igvBrowserRef.current.setLocus(session.locus);

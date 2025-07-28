@@ -10,7 +10,7 @@ const SearchButton = styled("button")(({ theme, isHomePage = false }) => ({
   cursor: "pointer",
   width: "100%",
   maxWidth: isHomePage ? "90%" : "400px",
-  background: "#F0F0F0" ,
+  background: "#F0F0F0",
   color: "#0F0F0F",
   borderRadius: theme.spacing(0.6),
   border: isHomePage ? `1px solid #F0F0F0` : `1px solid ${theme.palette.secondary.main}`,
@@ -67,14 +67,18 @@ function GlobalSearch({ isHomePage }) {
             sx={{ paddingLeft: theme => theme.spacing(1), display: "flex", alignItems: "center" }}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} size="xs" />
-            <Typography sx={{ ml: 2 }}>{isHomePage ? "Search for a variant to find predicted enhancers and target genes..." : "Search..."}</Typography>
+            <Typography sx={{ ml: 2 }}>
+              {isHomePage
+                ? "Search for a variant to find predicted enhancers and target genes..."
+                : "Search..."}
+            </Typography>
           </Box>
           <Box
             sx={{
               typography: "caption",
               fontWeight: "bold",
               color: "white",
-              backgroundColor: theme => (theme.palette.primary.main),
+              backgroundColor: theme => theme.palette.primary.main,
               padding: theme => `${theme.spacing(0.2)} ${theme.spacing(1)}`,
               borderRadius: theme => theme.spacing(0.4),
             }}
