@@ -138,7 +138,19 @@ const DataTrackTable: React.FC<DataTableProps> = ({
       label: "Cell Type",
       renderCell: (rowData: any) => (
         <Tooltip title={`Cell Type ID: ${rowData.cellTypeId}`} placement="top">
-          <span>{rowData.cellType}</span>
+          <span
+            style={{
+              display: "block",
+              minWidth: "200px",
+              maxWidth: "500px",
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              overflowWrap: "break-word",
+              overflow: "hidden",
+            }}
+          >
+            {rowData.cellType}
+          </span>
         </Tooltip>
       ),
     },
@@ -159,13 +171,30 @@ const DataTrackTable: React.FC<DataTableProps> = ({
         let url = rowData.datasetUrl;
         if (!url && rowData.dataset?.startsWith("ENCSR")) {
           url = `https://www.encodeproject.org/experiments/${rowData.dataset}`;
+        } else if (!url && rowData.dataset?.startsWith("syn")) {
+          url = `https://www.synapse.org/Synapse:${rowData.dataset}`;
         }
-        return url ? (
+        const content = url ? (
           <Link to={url} external newTab>
             {rowData.dataset || "N/A"}
           </Link>
         ) : (
           rowData.dataset || "N/A"
+        );
+        return (
+          <span
+            style={{
+              display: "block",
+              minWidth: "200px",
+              maxWidth: "500px",
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              overflowWrap: "break-word",
+              overflow: "hidden",
+            }}
+          >
+            {content}
+          </span>
         );
       },
     },
