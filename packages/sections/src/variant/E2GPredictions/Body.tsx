@@ -126,6 +126,10 @@ const tableColumns = (
             >
               {rowData.dataset}
             </Link>
+          ) : rowData.dataset.startsWith("syn") ? (
+            <Link to={`https://www.synapse.org/Synapse:${rowData.dataset}`} external newTab>
+              {rowData.dataset}
+            </Link>
           ) : (
             rowData.dataset
           )}
