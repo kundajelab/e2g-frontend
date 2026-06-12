@@ -21,7 +21,6 @@ const variantProfileWidgets = new Map<string, Widget>([
   [Variant.UniProtVariants.definition.id, Variant.UniProtVariants],
   [Variant.GWASCredibleSets.definition.id, Variant.GWASCredibleSets],
   [Variant.QTLCredibleSets.definition.id, Variant.QTLCredibleSets],
-  [Variant.EnhancerToGenePredictions.definition.id, Variant.EnhancerToGenePredictions],
   [Variant.Pharmacogenomics.definition.id, Variant.Pharmacogenomics],
 ]);
 
