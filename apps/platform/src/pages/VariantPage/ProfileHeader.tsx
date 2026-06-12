@@ -23,7 +23,7 @@ function ProfileHeader() {
     <BaseProfileHeader>
       <Box>
         <ProfileDescription loading={loading}>
-          {data?.variant.variantDescription}
+          {data?.variant?.variantDescription}
         </ProfileDescription>
         <Typography variant="subtitle2" mt={1}>
           Location
@@ -42,12 +42,14 @@ function ProfileHeader() {
           Ensembl Variant Effect Predictor (Ensembl VEP)
         </Typography>
         <Field loading={loading} title="Most severe consequence" testId="field-most-severe-consequence">
-          <Link
-            external
-            to={identifiersOrgLink("SO", data?.variant.mostSevereConsequence.id.slice(3))}
-          >
-            {data?.variant.mostSevereConsequence.label.replace(/_/g, " ")}
-          </Link>
+          {data?.variant?.mostSevereConsequence ? (
+            <Link
+              external
+              to={identifiersOrgLink("SO", data.variant.mostSevereConsequence.id.slice(3))}
+            >
+              {data.variant.mostSevereConsequence.label.replace(/_/g, " ")}
+            </Link>
+          ) : "N/A"}
         </Field>
         <Typography variant="subtitle2" mt={1}>
           Predictions
@@ -73,7 +75,7 @@ function ProfileHeader() {
         </Typography>
       </Box>
 
-      {data?.variant.alleleFrequencies.length > 0 && (
+      {data?.variant?.alleleFrequencies?.length > 0 && (
         <Paper sx={{ py: 2, px: 5, maxWidth: "100%" }} elevation={0} variant="outlined" data-testid="allele-frequencies-section">
           <Box
             display="flex"
