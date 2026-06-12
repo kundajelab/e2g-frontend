@@ -141,7 +141,7 @@ function NavBar({ name, search, api, downloads, docs, contact, homepage, items, 
               justifyContent: "center",
             }}
           >
-            <img width="30px" height="100%" alt="logo" src="/assets/img/ot-logo-small.png" />
+            <img width="30px" height="100%" alt="logo" src="/assets/img/vault_mark_logo.svg" />
           </Box>
         )}
         <Box
