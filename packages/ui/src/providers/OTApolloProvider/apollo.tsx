@@ -24,6 +24,13 @@ export const createApolloClient = (config: Config) => {
         EntityUnionType: ["Target", "Drug", "Disease", "Variant", "Gwas"],
       },
       typePolicies: {
+        Query: {
+          fields: {
+            meta: {
+              merge: true,
+            },
+          },
+        },
         ScoredComponent: {
           keyFields: ["componentId", "score"],
         },
