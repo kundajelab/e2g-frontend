@@ -1,22 +1,16 @@
 FROM node:22-slim AS build
 WORKDIR /app
 
-# Enable corepack for yarn
 RUN corepack enable
 
-# Install dependencies
-COPY package.json yarn.lock ./
-COPY apps/platform/package.json apps/platform/
-COPY packages/ot-constants/package.json packages/ot-constants/
-COPY packages/ot-utils/package.json packages/ot-utils/
-COPY packages/sections/package.json packages/sections/
-COPY packages/ui/package.json packages/ui/
-RUN yarn install --frozen-lockfile
-
-# Copy source and build
+# Copy everything (filtered by .dockerignore)
 COPY . .
+
+# Install and build
+RUN yarn install --frozen-lockfile
 ARG VITE_API_URL=http://localhost:4000/graphql
 ENV VITE_API_URL=$VITE_API_URL
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN yarn build:platform
 
 # Serve with nginx
