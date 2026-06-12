@@ -22,15 +22,5 @@ RUN yarn build:platform
 # Serve with nginx
 FROM nginx:alpine
 COPY --from=build /app/apps/platform/bundle-platform /usr/share/nginx/html
-COPY <<'EOF' /etc/nginx/conf.d/default.conf
-server {
-    listen 80;
-    root /usr/share/nginx/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-EOF
+COPY nginx.compose.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
