@@ -184,8 +184,6 @@ function HomePage(): JSX.Element {
 
   return (
     <>
-      <ShouldAccessPPP />
-
       <Helmet title={"E2G"}>
         <meta name="description" content={appDescription} />
         <link rel="canonical" href={appCanonicalUrl} />
