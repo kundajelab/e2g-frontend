@@ -4892,10 +4892,10 @@ ignore@^5.2.0:
   version "1.5.10"
   resolved "https://codeload.github.com/igvteam/igv-utils/tar.gz/a9726935178fc488e74bdc3c5c1059613d805415"
 
-igv@3.2.5:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/igv/-/igv-3.2.5.tgz#83ee8db958e602274337321398eedc4b2104f2d3"
-  integrity sha512-iBYiLsGfdvEMZOxd/QXVSd7T5TlS9ybNamQsS9M1CvuPfmOrNUfQHsEilgTABKYiB0K63cc1RcaEDCDjUqiJuQ==
+igv@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/igv/-/igv-3.8.1.tgz#56c51a39f62f4fff713de1b1c127ea4233dd588d"
+  integrity sha512-RSjQtEGA0NClfX9s+NS+2NGO/e2r3qYFiZPaNpqHcdgz0Vxyr9CZO3wINMmlB5mpYJWk53Mh3wkxHM5zqu9Bdg==
 
 immutable@^5.1.5:
   version "5.1.5"
