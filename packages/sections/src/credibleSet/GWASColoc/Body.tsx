@@ -124,10 +124,6 @@ const columns = [
     sortable: true,
   },
   {
-    id: "colocalisationMethod",
-    label: "Colocalisation Method",
-  },
-  {
     id: "betaRatioSignAverage",
     label: "Directionality",
     tooltip: "Effect directionality based on the ratio of betas between the two credible sets",
@@ -203,13 +199,13 @@ const columns = [
 ];
 
 type BodyProps = {
-  studyLocusId: string;
+  id: string;
   entity: string;
 };
 
-function Body({ studyLocusId, entity }: BodyProps): ReactElement {
+function Body({ id, entity }: BodyProps): ReactElement {
   const variables = {
-    studyLocusId: studyLocusId,
+    studyLocusId: id,
     size: table5HChunkSize,
     index: 0,
   };
@@ -234,9 +230,9 @@ function Body({ studyLocusId, entity }: BodyProps): ReactElement {
           <OtTable
             dataDownloader
             showGlobalFilter
-            dataDownloaderFileStem={`${studyLocusId}-credibleSets`}
-            sortBy="pValue"
-            order="asc"
+            dataDownloaderFileStem={`${id}-credibleSets`}
+            sortBy="h4"
+            order="desc"
             columns={columns}
             loading={request.loading}
             rows={request.data?.credibleSet.colocalisation.rows}

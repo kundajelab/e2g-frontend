@@ -22,6 +22,7 @@ import DownloadsSchema from "./pages/DownloadsPage/DownloadsSchema";
 import DownloadsDialog from "./pages/DownloadsPage/DownloadsDialog";
 import IGVPage from "./pages/IGVPage/IGVPage";
 import IngestionPage from "./pages/IngestionPage";
+import AnalysisPage from "./pages/AnalysisPage";
 
 const config = getConfig();
 
@@ -39,6 +40,14 @@ function App(): ReactElement {
             <Route path="/api" element={<APIPage />} />
             <Route path="/igv" element={<IGVPage />} />
             <Route path="/ingestion" element={<IngestionPage />} />
+            <Route
+              path="/analysis"
+              element={
+                <PrivateRoute>
+                  <AnalysisPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/downloads/*" element={<DownloadsPage />} />
             <Route path="/target/:ensgId/*" element={<TargetPage />} />

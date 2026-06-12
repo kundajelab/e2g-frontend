@@ -12,9 +12,9 @@ const dataTypes = [
     isPrivate: isPrivateDataType("somatic_mutation"),
   },
   {
-    id: "known_drug",
-    label: "Drugs",
-    isPrivate: isPrivateDataType("known_drug"),
+    id: "clinical",
+    label: "Clinical",
+    isPrivate: isPrivateDataType("clinical"),
   },
   {
     id: "affected_pathway",
@@ -48,7 +48,7 @@ const dataTypes = [
   },
 ];
 
-const dataTypesMap = dataTypes.reduce((acc, dataType) => {
+const dataTypesMap = dataTypes.reduce((acc: Record<string, string>, dataType) => {
   acc[dataType.id] = dataType.label;
   return acc;
 }, {});

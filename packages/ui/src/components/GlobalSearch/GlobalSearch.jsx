@@ -67,7 +67,7 @@ function GlobalSearch({ isHomePage }) {
             sx={{ paddingLeft: theme => theme.spacing(1), display: "flex", alignItems: "center" }}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} size="xs" />
-            <Typography sx={{ ml: 2 }}>
+            <Typography data-testid="global-search-input-trigger" sx={{ ml: 2 }}>
               {isHomePage
                 ? "Search for a variant to find predicted enhancers and target genes..."
                 : "Search..."}

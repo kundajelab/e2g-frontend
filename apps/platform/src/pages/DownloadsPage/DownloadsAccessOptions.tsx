@@ -4,10 +4,12 @@ import { singleBtnGroupObj } from "ui/src/components/OtBtnGroup";
 
 const FTP = "ftp-location";
 const GCP = "gcp-location";
+const AWS = "aws-location";
 // component ids to show when given location url
 const DATA_MAP = {
   [FTP]: ["http-location", FTP, "rsync", "wget"],
   [GCP]: [GCP, "gcp"],
+  [AWS]: [AWS, "aws"],
 };
 
 type DownloadsAccessOptionsProps = {
@@ -40,6 +42,10 @@ function DownloadsAccessOptions({ data, locationUrl, version }: DownloadsAccessO
       title: "Google Cloud",
       component: <GcpLocation link={getLink("gcp-location")} />,
     },
+      "aws-location": {
+      title: "AWS",
+      component: <AwsLocation link={getLink("aws-location")} />,
+    },
   };
 
   const SCRIPT_MAP: Record<string, singleBtnGroupObj> = {
@@ -52,8 +58,12 @@ function DownloadsAccessOptions({ data, locationUrl, version }: DownloadsAccessO
       component: <WgetScript link={getLink("ftp-location")} />,
     },
     gcp: {
-      title: "Google Cloud",
+      title: "Google Cloud CLI",
       component: <GcpScript link={getLink("gcp-location")} />,
+    },
+    aws: {
+      title: "AWS CLI",
+      component: <AwsScript link={getLink("aws-location")} />,
     },
   };
 
@@ -88,7 +98,36 @@ function HttpLocation({ link }: { link: string }) {
   );
 }
 
+function GcpLocationMemo() {
+  return (
+    <Typography
+      variant="caption"
+      sx={{ 
+        mb: 1, 
+        display: "block",
+        fontWeight: "medium",
+        borderColor: "#1f5279",
+        backgroundColor: "#1f5279",
+        color: "white",
+        p: 1,
+        borderRadius: 1,
+        border: "1px solid",
+      }}
+    >
+    You need to specify <b>a billing project</b> when accessing the data from the Google Cloud.
+    </Typography>
+  )
+}
+
 function GcpLocation({ link }: { link: string }) {
+  return (
+    <Box sx={{ p: 2 }}>
+      <OtCodeBlock textToCopy={link}> {link}</OtCodeBlock>
+    </Box>
+  );
+}
+
+function AwsLocation({ link }: { link: string }) {
   return (
     <Box sx={{ p: 2 }}>
       <OtCodeBlock textToCopy={link}> {link}</OtCodeBlock>
@@ -126,7 +165,17 @@ function RsyncScript({ version, path, link }: { version: string; path: string; l
 }
 
 function GcpScript({ link }: { link: string }) {
-  const cmd = `gcloud storage cp -r ${link}/ .`;
+  const cmd = `gcloud storage cp -r --billing-project $\{PROJECT_ID\} ${link}/ .`;
+  return (
+    <Box sx={{ p: 2 }}>
+      <GcpLocationMemo />
+      <OtCodeBlock textToCopy={cmd}>{cmd}</OtCodeBlock>
+    </Box>
+  );
+}
+
+function AwsScript({ link }: { link: string }) {
+  const cmd = `aws s3 cp --recursive --no-sign-request ${link}/ .`;
   return (
     <Box sx={{ p: 2 }}>
       <OtCodeBlock textToCopy={cmd}>{cmd}</OtCodeBlock>
@@ -142,7 +191,6 @@ function getFilteredData({
   containedInArray: Array<Record<"@id", string>>;
 }) {
   const entriesToShow: Record<string, singleBtnGroupObj> = {};
-
   containedInArray.map(e => {
     DATA_MAP[e["@id"]].map(i => {
       if (Object.prototype.hasOwnProperty.call(allDataObj, i)) entriesToShow[i] = allDataObj[i];

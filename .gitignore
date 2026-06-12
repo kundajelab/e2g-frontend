@@ -44,3 +44,10 @@ yarn-error.log*
 ssl/
 .env
 bundle-platform
+
+# testing
+./packages/platform-test/playwright-report
+./packages/platform-test/test-results
+./packages/platform-test/.env
+playwright-report/
+test-results/

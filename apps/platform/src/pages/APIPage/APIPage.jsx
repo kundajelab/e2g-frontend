@@ -1,5 +1,5 @@
 import { Suspense, useState, lazy } from "react";
-import { LoadingBackdrop, Link } from "ui";
+import { LoadingBackdrop, Link, PrivateWrapper } from "ui";
 import {
   Accordion,
   AccordionSummary,
@@ -28,6 +28,9 @@ import CREDIBLE_SET_ANNOTATION from "./CredibleSetAnnotation.gql";
 import DISEASE_ANNOTATION_GWAS from "./DiseaseAnnotationGWAS.gql";
 import STUDY_ANNOTATION from "./StudyAnnotation.gql";
 import VARIANT_ANNOTATION from "./VariantAnnotation.gql";
+import PPPCRISPRQUERY from "./PPPCrisprQuery.gql";
+import PPPACCOUNTDISEASES from "./PPPAssociatedDisease.gql";
+import TARGETQTLCREDIBLESSETS from "./TargetQTLCredibleSetsQuery.gql";
 
 const QueryButton = styled(Button)`
   color: #fff;
@@ -76,7 +79,11 @@ function APIPage() {
         <Link external to="https://community.opentargets.org">
           Open Targets Community
         </Link>{" "}
-        for more how-to guides and tutorials.
+         for more how-to guides and tutorials. You can also access the Open targets data through our {" "}
+        <Link external to="https://platform-docs.opentargets.org/data-access/model-context-protocol">
+          MCP
+        </Link>{" "}, which enables more integrated 
+        interactions with the Platform.
       </Typography>
       <Typography paragraph>
         Please note that our API is optimised for a single query. For more programmatic or
@@ -95,6 +102,49 @@ function APIPage() {
           <Typography variant="h5" paragraph>
             Example queries
           </Typography>
+          <PrivateWrapper>
+            <Accordion sx={{ mb: 2 }}>
+              <AccordionSummary expandIcon={<FontAwesomeIcon icon={faChevronDown} />}>
+                <Typography variant="subtitle2" color="secondary">Partner Preview specific queries</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div>
+                  <Typography variant="subtitle2" display="block" paragraph>
+                    Explore prepublication OT CRISPR evidence that supports a specific target-disease association
+                  </Typography>
+                  <QueryButton
+                    className={classes.buttonMargin}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setQuery(PPPCRISPRQUERY.loc.source.body)}
+                  >
+                    Run sample query
+                  </QueryButton>
+                  <Typography variant="subtitle2" display="block" paragraph>
+                     Explore all targets associated with Parkinson disease through prepublication data from OT CRISPR projects
+                  </Typography>
+                  <QueryButton
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setQuery(PPPACCOUNTDISEASES.loc.source.body)}
+                  >
+                    Run sample query
+                  </QueryButton>
+                  <Typography variant="subtitle2" display="block" paragraph>
+                    Explore molQTL credible sets for INSL6, including the ones from OTAR projects studies such as OTAR2057 IBDverse and OTAR2065 Neuroinflammation
+                  </Typography>
+                  <QueryButton
+                    className={classes.buttonMargin}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setQuery(TARGETQTLCREDIBLESSETS.loc.source.body)}
+                  >
+                    Run sample query
+                  </QueryButton>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          </PrivateWrapper>
           <Accordion>
             <AccordionSummary expandIcon={<FontAwesomeIcon icon={faChevronDown} />}>
               <Typography variant="subtitle2">Target-disease association</Typography>
@@ -162,6 +212,17 @@ function APIPage() {
                 >
                   Run sample query
                 </QueryButton>
+                <Typography variant="subtitle2" display="block" paragraph>
+                  Explore molQTL credible sets for INSL6, including the ones from OTAR projects studies
+                </Typography>
+                <QueryButton
+                  className={classes.buttonMargin}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setQuery(TARGETQTLCREDIBLESSETS.loc.source.body)}
+                >
+                  Run sample query
+                </QueryButton>
               </div>
             </AccordionDetails>
           </Accordion>
@@ -183,7 +244,7 @@ function APIPage() {
                   Run sample query
                 </QueryButton>
                 <Typography variant="subtitle2" display="block" paragraph>
-                  GWAS studies associated with a specified disease
+                  GWAS associated with a specified disease
                 </Typography>
                 <QueryButton
                   className={classes.buttonMargin}
@@ -264,7 +325,7 @@ function APIPage() {
             <AccordionDetails>
               <div>
                 <Typography variant="subtitle2" display="block" paragraph>
-                  Colocalisation metrics for overlapping credible sets from GWAS studies
+                  Colocalisation metrics for overlapping GWAS credible sets
                 </Typography>
                 <QueryButton
                   className={classes.buttonMargin}

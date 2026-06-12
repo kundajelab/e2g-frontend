@@ -14,28 +14,31 @@
   "scripts": {
     "build": "turbo run build",
     "build:no-cache": "turbo run build --parallel --no-cache",
+    "generateAPITypes": "turbo run generateAPITypes",
     "dev": "turbo run dev --parallel",
     "dev:platform": "turbo run dev --filter=platform",
     "build:platform": "turbo run build --filter=platform",
     "dev:platform:ppp": "turbo run dev-ppp --filter=platform",
     "build:platform:ppp": "turbo run build-ppp --filter=platform",
-    "lint": "turbo run lint",
-    "lint:platform": "turbo run lint --filter=platform",
-    "format": "turbo run prettier:all",
-    "format:check": "turbo run prettier:check",
-    "prepare": "husky install"
+    "lint": "npx biome check .",
+    "lint:fix": "npx biome check --write .",
+    "format": "npx biome format .",
+    "format:fix": "npx biome format --write .",
+    "format:check": "npx biome ci",
+    "dev:test:platform:e2e": "turbo run dev-test",
+    "dev:test:platform:e2e:smoke": "turbo run dev-test:smoke",
+    "test:platform:e2e": "turbo run test:platform:e2e",
+    "test:platform:e2e:smoke": "turbo run test:platform:e2e:smoke",
+    "check": "npx biome check --formatter-enabled=true .",
+    "check:fix": "npx biome check --formatter-enabled=true --write .",
+    "prepare": "husky install",
+    "test_workflow": "act -W '.github/workflows/e2e-ci.yml' --action-offline-mode --container-architecture linux/amd64"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-config-custom": "*",
+    "@biomejs/biome": "2.2.4",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "^2.5.1",
     "turbo": "^2.4.2"
   },
-  "packageManager": "yarn@1.22.18",
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --cache --fix",
-    "*.{ts,tsx,js,jsx,md}": "prettier --write"
-  }
+  "packageManager": "yarn@1.22.18"
 }

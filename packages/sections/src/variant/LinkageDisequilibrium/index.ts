@@ -1,9 +1,14 @@
-const id = "linkagedisequilibrium";
+import { lazy } from "react";
+
 export const definition = {
-  id,
+  id: "linkagedisequilibrium",
   name: "Variants in Linkage Disequilibrium",
   shortName: "LD",
-  hasData: data => {
-    return data?.linkageDisequilibriumsCount > 0 || data?.variant?.linkageDisequilibriumsCount > 0;
+  hasData: (data: any) => {
+    return (data?.linkageDisequilibriumsCount ?? 0) > 0;
   },
 };
+
+export { default as Summary } from "./Summary";
+
+export const getBodyComponent = () => lazy(() => import("./Body"));

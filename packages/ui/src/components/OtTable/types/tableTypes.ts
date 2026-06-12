@@ -18,6 +18,7 @@ export type DefaultSortProp =
 
 export type OtTableProps = {
   showGlobalFilter: boolean;
+  globalFilterPlaceholderText?: string,
   tableDataLoading: boolean;
   columns: Array<Record<string, unknown>>;
   rows: Array<Record<string, unknown>>;
@@ -27,19 +28,23 @@ export type OtTableProps = {
   defaultSortObj: DefaultSortProp;
   dataDownloader: boolean;
   dataDownloaderColumns?: Array<Record<string, unknown>>;
+  dataDownloaderRows?: Array<Record<string, unknown>>;
   dataDownloaderFileStem: string;
   query: DocumentNode;
   variables: Record<string, unknown>;
   showColumnVisibilityControl: boolean;
+  showRowsPerPageControl: boolean;
+  showPaginationAlways: boolean;
   loading: boolean;
   enableMultipleRowSelection: boolean;
   getSelectedRows: (r: Row<any>[]) => void;
   staticColumns: boolean;
   staticRows: boolean;
   pageSize: number;
-  getFilteredRows: boolean; // Temporary declarations as booleans
+  getFilteredRows: any;
   getEnteredRow: boolean;
   getExitedRow: boolean;
+  wrapControls: any;
 };
 
 export type loadingTableRows = {
@@ -52,6 +57,7 @@ export type loadingTableRows = {
 
 export type OtTableSearchProps = {
   setGlobalSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  placeholderText?: string;
 };
 
 export type OtTableColumnVisibilityProps = {
