@@ -18,6 +18,7 @@ query VariantLinkageDisequilibrium($variantId: String!) {
     referenceAllele
     alternateAllele
     linkageDisequilibriumsCount
+    linkageDisequilibriumStatus
     rsIds
   }
 }
