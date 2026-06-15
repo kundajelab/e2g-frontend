@@ -137,11 +137,7 @@ export const mainMenuItems: MenuItem[] = config.profile.mainMenuItems ?? [
     external: false,
     showOnlyPartner: true,
   },
-  {
-    name: "Documentation",
-    url: "https://platform-docs.opentargets.org/getting-started",
-    external: true,
-  },
+  // "Documentation" and "Community" intentionally hidden for the E2G fork.
   {
     name: "PPP Documentation",
     url: "https://home.opentargets.org/ppp-documentation",
@@ -157,11 +153,6 @@ export const mainMenuItems: MenuItem[] = config.profile.mainMenuItems ?? [
     name: "API",
     url: "/api",
     external: false,
-  },
-  {
-    name: "Community",
-    url: "https://community.opentargets.org/",
-    external: true,
   },
   {
     name: "Contact us",
