@@ -33,5 +33,9 @@ RUN yarn build:platform
 # Serve with nginx
 FROM nginx:alpine
 COPY --from=build /app/apps/platform/bundle-platform /usr/share/nginx/html
+# default.conf is the HTTP/dev config; app.conf is the shared server body it (and
+# the TLS config mounted at cutover) include. The TLS config + certs are mounted
+# at runtime via docker-compose.tls.yml — not baked in.
 COPY nginx.compose.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+COPY nginx.app.conf /etc/nginx/snippets/app.conf
+EXPOSE 80 443
