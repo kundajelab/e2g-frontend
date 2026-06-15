@@ -115,8 +115,8 @@ function AboutPublic(): JSX.Element {
         .
       </Typography>
       <Typography>
-        The E2G portal was made in collaboration between the <Link to="https://www.engreitzlab.org/" external>Engreitz Lab</Link> and the <Link to="https://kundajelab.github.io/" external>Kundaje Lab</Link>, by
-        Riya Sinha and Angel Ochoa.
+        The E2G portal was made in collaboration between the <Link to="https://www.engreitzlab.org/" external>Engreitz Lab</Link> and the <Link to="https://kundajelab.github.io/" external>Kundaje Lab</Link>, by{" "}
+        <Link to="https://riyavsinha.github.io/" external>Riya Sinha</Link> and Angel Ochoa.
       </Typography>
     </>
   );
