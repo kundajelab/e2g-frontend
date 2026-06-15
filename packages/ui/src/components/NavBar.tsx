@@ -183,9 +183,16 @@ function NavBar({ name, search, api, downloads, docs, contact, homepage, items, 
                 sm: 2,
                 md: 0,
               },
+              // Keep the label on one line and never let the flex row squeeze the
+              // button narrower than its text (which would wrap to two lines and
+              // overflow the button height).
+              flexShrink: 0,
+              whiteSpace: "nowrap",
             }}
           >
-            <Typography color="white">IGV Browser</Typography>
+            <Typography color="white" sx={{ whiteSpace: "nowrap" }}>
+              IGV Browser
+            </Typography>
           </Button>
           <IconButton
             component="a"
