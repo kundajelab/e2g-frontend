@@ -34,6 +34,8 @@ const columns = [
     },
     filterValue: ({ target }: { target: Target }) =>
       target?.approvedSymbol || "",
+    exportValue: ({ target }: { target: Target }) =>
+      target?.approvedSymbol || "",
   },
   {
     id: "biosample",
@@ -54,6 +56,8 @@ const columns = [
     },
     filterValue: ({ biosample }: { biosample: Biosample }) =>
       biosample?.biosampleFromSource || biosample?.biosampleId || "",
+    exportValue: ({ biosample }: { biosample: Biosample }) =>
+      biosample?.biosampleName || biosample?.biosampleId || "",
   },
   {
     id: "intervalType",
