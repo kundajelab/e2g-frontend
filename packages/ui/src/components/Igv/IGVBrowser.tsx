@@ -112,7 +112,7 @@ const IGVBrowser = forwardRef<
 
       const browserOptions = {
         genome: "hg38",
-        locus, // Use the passed locus prop here,
+        locus,
         roi,
       };
 

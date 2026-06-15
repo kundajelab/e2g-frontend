@@ -11,6 +11,8 @@ This repository holds the Enhancer2Gene (E2G) portal.
 
 This project contains the [E2G](https://e2g.stanford.edu/) web application. To run in development mode, you can run: `yarn dev` in the root directory.
 
+To run only Platform `yarn dev:platform`
+
 ## Building production-ready bundle
 
 From the root directory run: `yarn build`. This will generate a production-ready bundle.

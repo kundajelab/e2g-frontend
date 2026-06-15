@@ -1,9 +1,14 @@
-const id = "e2gpredictions";
+import { lazy } from "react";
+
 export const definition = {
-  id,
+  id: "e2gpredictions",
   name: "Enhancer-to-gene predictions",
   shortName: "EG",
-  hasData: data => {
-    return data?.enhancerGenePredictionsCount > 0; // section
+  hasData: (data: any) => {
+    return (data?.enhancerGenePredictionsCount ?? 0) > 0;
   },
 };
+
+export { default as Summary } from "./Summary";
+
+export const getBodyComponent = () => lazy(() => import("./Body"));

@@ -23,30 +23,33 @@ function ProfileHeader() {
     <BaseProfileHeader>
       <Box>
         <ProfileDescription loading={loading}>
-          {data?.variant.variantDescription}
+          {data?.variant?.variantDescription}
         </ProfileDescription>
         <Typography variant="subtitle2" mt={1}>
           Location
         </Typography>
-        <Field loading={loading} title="GRCh38">
+        <Field loading={loading} title="GRCh38" testId="field-grch38-location">
           {data?.variant.chromosome}:{data?.variant.position}
         </Field>
-        <Allele loading={loading} label="Reference allele" value={data?.variant.referenceAllele} />
+        <Allele loading={loading} label="Reference allele" value={data?.variant.referenceAllele} testId="field-reference-allele" />
         <Allele
           loading={loading}
           label="Alternative allele (effect allele)"
           value={data?.variant.alternateAllele}
+          testId="field-alternative-allele"
         />
         <Typography variant="subtitle2" mt={1}>
           Ensembl Variant Effect Predictor (Ensembl VEP)
         </Typography>
-        <Field loading={loading} title="Most severe consequence">
-          <Link
-            external
-            to={identifiersOrgLink("SO", data?.variant.mostSevereConsequence.id.slice(3))}
-          >
-            {data?.variant.mostSevereConsequence.label.replace(/_/g, " ")}
-          </Link>
+        <Field loading={loading} title="Most severe consequence" testId="field-most-severe-consequence">
+          {data?.variant?.mostSevereConsequence ? (
+            <Link
+              external
+              to={identifiersOrgLink("SO", data.variant.mostSevereConsequence.id.slice(3))}
+            >
+              {data.variant.mostSevereConsequence.label.replace(/_/g, " ")}
+            </Link>
+          ) : "N/A"}
         </Field>
         <Typography variant="subtitle2" mt={1}>
           Predictions
@@ -72,8 +75,8 @@ function ProfileHeader() {
         </Typography>
       </Box>
 
-      {data?.variant.alleleFrequencies.length > 0 && (
-        <Paper sx={{ py: 2, px: 5, maxWidth: "100%" }} elevation={0} variant="outlined">
+      {data?.variant?.alleleFrequencies?.length > 0 && (
+        <Paper sx={{ py: 2, px: 5, maxWidth: "100%" }} elevation={0} variant="outlined" data-testid="allele-frequencies-section">
           <Box
             display="flex"
             justifyContent="space-between"
@@ -115,18 +118,19 @@ type AlleleProps = {
   loading: boolean;
   label: string;
   value: string;
+  testId?: string;
 };
 
-function Allele({ loading, label, value }: AlleleProps) {
+function Allele({ loading, label, value, testId }: AlleleProps) {
   return value?.length >= 15 ? (
-    <>
+    <Box data-testid={testId}>
       <Typography variant="subtitle2">{label}</Typography>
       <LongText lineLimit={2} variant="body2">
         <span style={{ textWrap: "wrap", wordWrap: "break-word" }}>{value}</span>
       </LongText>
-    </>
+    </Box>
   ) : (
-    <Field loading={loading} title={label}>
+    <Field loading={loading} title={label} testId={testId}>
       {value}
     </Field>
   );
@@ -183,7 +187,7 @@ function AlleleFrequencyPlot({ data }) {
 
 function BarGroup({ dataRow: { label, alleleFrequency }, dps }) {
   return (
-    <Box display="flex" gap={1} alignItems="center" width="100%">
+    <Box display="flex" gap={1} alignItems="center" width="100%" data-testid="allele-frequency-bar">
       <Typography width={170} fontSize="13.5px" variant="body2" textAlign="right">
         {label}
       </Typography>

@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { Link, SectionItem, Tooltip, OtTable } from "ui";
 import { definition } from ".";
 import Description from "./Description";
 import LD_QUERY from "./LDQuery.gql";
+
+// How often to re-check the backend while LD is still being fetched from Ensembl.
+const LD_POLL_INTERVAL_MS = 5000;
 
 type TableColumn<T> = {
   id: string;
@@ -134,7 +139,22 @@ export function Body({ id, entity }: BodyProps) {
 
   const request = useQuery(LD_QUERY, {
     variables,
+    notifyOnNetworkStatusChange: true,
   });
+
+  const ldStatus = request.data?.variant?.linkageDisequilibriumStatus;
+
+  // The first time a variant is viewed, the backend kicks off a background
+  // Ensembl fetch and reports "pending". Poll until it resolves to "complete"
+  // (data ready) or "failed", then stop. Polling also stops on unmount.
+  useEffect(() => {
+    if (ldStatus === "pending") {
+      request.startPolling(LD_POLL_INTERVAL_MS);
+    } else {
+      request.stopPolling();
+    }
+    return () => request.stopPolling();
+  }, [ldStatus]);
 
   return (
     <SectionItem
@@ -149,6 +169,46 @@ export function Body({ id, entity }: BodyProps) {
         />
       )}
       renderBody={() => {
+        if (ldStatus === "pending") {
+          return (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+                py: 6,
+              }}
+            >
+              <CircularProgress />
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ textAlign: "center", maxWidth: 480 }}
+              >
+                Fetching linkage disequilibrium data from Ensembl. This is the first time this
+                variant has been requested, so it may take a couple of minutes. This panel will
+                update automatically.
+              </Typography>
+            </Box>
+          );
+        }
+
+        if (ldStatus === "failed") {
+          return (
+            <Box sx={{ display: "flex", justifyContent: "center", py: 6 }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ textAlign: "center", maxWidth: 480 }}
+              >
+                Linkage disequilibrium data could not be retrieved from Ensembl for this variant.
+                Please try again later.
+              </Typography>
+            </Box>
+          );
+        }
+
         let sortedRows = [];
         sortedRows = structuredClone(request.data?.variant.linkageDisequilibriums || []);
         sortedRows?.sort((a, b) => b.r2 - a.r2);

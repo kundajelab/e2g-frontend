@@ -3,5 +3,11 @@ query TargetTooltipQuery($ensgId: String!) {
     id
     name: approvedName
     description: functionDescriptions
+    genomicLocation {
+      chromosome
+      start
+      end
+      strand
+    }
   }
 }

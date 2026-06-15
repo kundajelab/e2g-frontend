@@ -8,7 +8,10 @@ import SEARCH_QUERY from "./components/Search/SearchQuery.gql";
 import HomePage from "./pages/HomePage/HomePage";
 import SearchPage from "./pages/SearchPage";
 import DiseasePage from "./pages/DiseasePage/DiseasePage";
-import DownloadsPage from "./pages/DownloadsPage";
+// Render our parallel Enhancer2Gene downloads page instead of OT's DownloadsPage.
+// OT's DownloadsPage component is intentionally left untouched to avoid upstream
+// merge conflicts — we only swap which component the /downloads route renders.
+import E2GDownloadsPage from "./pages/E2GDownloadsPage";
 import DrugPage from "./pages/DrugPage";
 import TargetPage from "./pages/TargetPage";
 import EvidencePage from "./pages/EvidencePage";
@@ -22,6 +25,7 @@ import DownloadsSchema from "./pages/DownloadsPage/DownloadsSchema";
 import DownloadsDialog from "./pages/DownloadsPage/DownloadsDialog";
 import IGVPage from "./pages/IGVPage/IGVPage";
 import IngestionPage from "./pages/IngestionPage";
+import AnalysisPage from "./pages/AnalysisPage";
 
 const config = getConfig();
 
@@ -39,8 +43,16 @@ function App(): ReactElement {
             <Route path="/api" element={<APIPage />} />
             <Route path="/igv" element={<IGVPage />} />
             <Route path="/ingestion" element={<IngestionPage />} />
+            <Route
+              path="/analysis"
+              element={
+                <PrivateRoute>
+                  <AnalysisPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/downloads/*" element={<DownloadsPage />} />
+            <Route path="/downloads/*" element={<E2GDownloadsPage />} />
             <Route path="/target/:ensgId/*" element={<TargetPage />} />
             <Route path="/disease/:efoId/*" element={<DiseasePage />} />
             <Route path="/evidence/:ensgId/:efoId/*" element={<EvidencePage />} />

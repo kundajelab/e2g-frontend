@@ -2,7 +2,7 @@ import { Box, Card, CardContent, Divider, Grid, Skeleton } from "@mui/material";
 import { v1 } from "uuid";
 
 type SectionContainerLoaderProps = {
-  sectionsCount: number;
+  sectionsCount?: number;
 };
 
 function SectionLoader({ sectionsCount = 1 }: SectionContainerLoaderProps) {
@@ -10,7 +10,7 @@ function SectionLoader({ sectionsCount = 1 }: SectionContainerLoaderProps) {
 
   return loadingSections.map((_, i) => (
     <Grid key={v1()} item xs={12}>
-      <section>
+      <section data-testid="section-loader">
         <Card elevation={0} variant="outlined">
           <Box sx={{ p: 2, display: "flex", gap: 1, alignItems: "center" }}>
             <Skeleton animation="wave" variant="circular" width={40} height={40} />

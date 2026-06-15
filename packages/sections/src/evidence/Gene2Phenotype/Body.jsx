@@ -17,8 +17,8 @@ import { epmcUrl, sentenceCase } from "@ot/utils";
 import OPEN_TARGETS_GENETICS_QUERY from "./sectionQuery.gql";
 import { definition } from ".";
 
-const g2pUrl = (studyId, symbol) =>
-  `https://www.ebi.ac.uk/gene2phenotype/search?query=${symbol}&panel=${studyId}`;
+const g2pUrl = (targetFromSourceId, diseaseFromSource) =>
+  `https://www.ebi.ac.uk/gene2phenotype/search?query=${targetFromSourceId}-related%20${diseaseFromSource}`;
 
 const getColumns = label => [
   {
@@ -67,9 +67,9 @@ const getColumns = label => [
     label: (
       <DirectionOfEffectTooltip docsUrl="https://platform-docs.opentargets.org/evidence#gene2phenotype"></DirectionOfEffectTooltip>
     ),
-    renderCell: ({ variantEffect, directionOnTrait }) => {
+    renderCell: ({ directionOnTarget, directionOnTrait }) => {
       return (
-        <DirectionOfEffectIcon variantEffect={variantEffect} directionOnTrait={directionOnTrait} />
+        <DirectionOfEffectIcon variantEffect={directionOnTarget} directionOnTrait={directionOnTrait} />
       );
     },
   },
@@ -98,8 +98,8 @@ const getColumns = label => [
     id: "studyId",
     label: "Panel",
     enableHiding: false,
-    renderCell: ({ studyId, target: { approvedSymbol } }) => (
-      <Link external to={g2pUrl(studyId, approvedSymbol)}>
+    renderCell: ({ studyId, targetFromSourceId, diseaseFromSource }) => (
+      <Link external to={g2pUrl(targetFromSourceId, diseaseFromSource)}>
         {studyId}
       </Link>
     ),

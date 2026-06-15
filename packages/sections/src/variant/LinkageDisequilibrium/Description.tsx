@@ -22,10 +22,6 @@ function Description({ variantId, referenceAllele, alternateAllele }: Descriptio
       <Link to="https://rest.ensembl.org/documentation/info/ld_id_get" external>
         Ensembl
       </Link>
-      <br />
-      <br />
-      [Please note that if this is the first time a variant is being loaded, it may take a couple
-      minutes for the data to be available.]
     </>
   );
 }

@@ -2,16 +2,11 @@ import { SummaryItem, usePlatformApi } from "ui";
 
 import { definition } from ".";
 import LD_SUMMARY from "./LDSummaryFragment.gql";
-import { useQuery } from "@apollo/client";
 
-function Summary({ variantId }: { variantId: string }) {
-  const request = useQuery(LD_SUMMARY, {
-    variables: {
-      variantId,
-    },
-  });
+function Summary() {
+  const request = usePlatformApi(LD_SUMMARY);
 
-  return <SummaryItem definition={definition} request={request} subText="" />;
+  return <SummaryItem definition={definition} request={request} />;
 }
 
 Summary.fragments = {

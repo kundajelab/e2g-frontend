@@ -1,6 +1,4 @@
-query VariantLDSummary($variantId: String!) {
-  variant(variantId: $variantId) {
-    id
-    linkageDisequilibriumsCount
-  }
+fragment LDSummaryFragment on Variant {
+  linkageDisequilibriumsCount
+  linkageDisequilibriumStatus
 }

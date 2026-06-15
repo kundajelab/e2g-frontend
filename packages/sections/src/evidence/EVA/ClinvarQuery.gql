@@ -22,10 +22,12 @@ query ClinvarQuery($ensemblId: String!, $efoId: String!, $size: Int!, $cursor: S
         variant {
           id
           hgvsId
+          chromosome
+          position
           referenceAllele
           alternateAllele
         }
-        variantEffect
+        directionOnTarget
         directionOnTrait
         diseaseFromSource
         variantRsId

@@ -1,0 +1,36 @@
+query EnhancerToGenePredictionsQuery($variantId: String!) {
+  variant(variantId: $variantId) {
+    id
+    rsIds
+    referenceAllele
+    alternateAllele
+    enhancerToGenes(page: { size: 3000, index: 0 }) {
+      count
+      rows {
+        chromosome
+        start
+        end
+        target {
+          id
+          approvedSymbol
+          approvedName
+        }
+        pmid
+        biosample {
+          biosampleId
+          biosampleName
+        }
+        biosampleFromSourceId
+        score
+        resourceScore {
+          name
+          value
+        }
+        datasourceId
+        distanceToTss
+        studyId
+        intervalType
+      }
+    }
+  }
+}

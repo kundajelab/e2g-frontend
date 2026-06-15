@@ -20,7 +20,7 @@ function CredibleSetPage(): ReactElement {
     return <NotFoundPage />;
   }
 
-  const { id: studyId, studyType } = data?.credibleSet?.study || {};
+  const { id: studyId } = data?.credibleSet?.study || {};
   const { id: variantId, referenceAllele, alternateAllele } = data?.credibleSet?.variant || {};
 
   return (
@@ -34,11 +34,10 @@ function CredibleSetPage(): ReactElement {
       <>
         <Header
           loading={loading}
-          studyId={studyId}
-          variantId={variantId}
-          referenceAllele={referenceAllele}
-          alternateAllele={alternateAllele}
-          studyType={studyType}
+          studyId={studyId ?? ""}
+          variantId={variantId ?? ""}
+          referenceAllele={referenceAllele ?? ""}
+          alternateAllele={alternateAllele ?? ""}
         />
         <ScrollToTop />
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -51,14 +50,7 @@ function CredibleSetPage(): ReactElement {
             />
           </Tabs>
         </Box>
-        <Profile
-          studyLocusId={studyLocusId}
-          variantId={variantId}
-          referenceAllele={referenceAllele}
-          alternateAllele={alternateAllele}
-          studyType={studyType}
-          loading={loading}
-        />
+        {variantId && <Profile studyLocusId={studyLocusId} variantId={variantId} />}
       </>
     </BasePage>
   );
