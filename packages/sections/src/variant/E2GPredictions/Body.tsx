@@ -28,6 +28,9 @@ const tableColumns = (
   {
     id: "datatrack",
     label: "Add to IGV",
+    // UI action button, not tabular data — exclude from downloads (otherwise the
+    // raw datatrack object serializes as "[object Object]").
+    exportValue: false,
     renderCell: rowData => {
       if (rowData.datatrack) {
         const tracks: ITrackInfo[] = [
@@ -105,6 +108,8 @@ const tableColumns = (
     ),
     sortable: true,
     accessorFn: rowData => rowData.targetGene.symbol,
+    // Export the gene symbol, not the raw {id, symbol} object ("[object Object]").
+    exportValue: rowData => rowData.targetGene?.symbol ?? "",
   },
   {
     id: "score",
@@ -178,9 +183,12 @@ const tableColumns = (
   },
   {
     id: "enhancerGeneDistance",
-    label: "E-G Distance",
+    label: "Enhancer-Gene Distance",
     renderCell: rowData => rowData.enhancerToGeneDistance,
     sortable: true,
+    // Column id ("enhancerGeneDistance") doesn't match the data field
+    // ("enhancerToGeneDistance"), so the default export resolves to blank.
+    exportValue: rowData => rowData.enhancerToGeneDistance ?? "",
   },
 ];
 
@@ -241,6 +249,7 @@ export function Body({ id, entity }: BodyProps) {
               columns={tableColumns(id, tracksSet, addTrack, removeTrack)}
               rows={sortedRows}
               dataDownloader
+              dataDownloaderFileStem={`${id}-enhancer-gene-predictions`}
               query={E2G_PREDICTIONS_QUERY.loc.source.body}
               variables={variables}
               loading={request.loading}
