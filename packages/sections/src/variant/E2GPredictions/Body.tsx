@@ -121,26 +121,26 @@ const tableColumns = (
     id: "dataset",
     label: "Dataset",
     renderCell: rowData => {
+      // dataset can be null for some predictions (NEW backend emits null, not ""), so
+      // guard before calling string methods — otherwise renderCell throws and the whole
+      // section crashes (TypeError: Cannot read properties of null (reading 'startsWith')).
+      const dataset = rowData.dataset ?? "";
       const text = (
         <div style={{ maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis" }}>
-          {rowData.dataset.startsWith("ENCSR") ? (
-            <Link
-              to={`https://www.encodeproject.org/experiments/${rowData.dataset}`}
-              external
-              newTab
-            >
-              {rowData.dataset}
+          {dataset.startsWith("ENCSR") ? (
+            <Link to={`https://www.encodeproject.org/experiments/${dataset}`} external newTab>
+              {dataset}
             </Link>
-          ) : rowData.dataset.startsWith("syn") ? (
-            <Link to={`https://www.synapse.org/Synapse:${rowData.dataset}`} external newTab>
-              {rowData.dataset}
+          ) : dataset.startsWith("syn") ? (
+            <Link to={`https://www.synapse.org/Synapse:${dataset}`} external newTab>
+              {dataset}
             </Link>
           ) : (
-            rowData.dataset
+            dataset
           )}
         </div>
       );
-      if (rowData.dataset.length > 25) {
+      if (dataset.length > 25) {
         return (
           <Tooltip title={text} placement="top">
             {text}
