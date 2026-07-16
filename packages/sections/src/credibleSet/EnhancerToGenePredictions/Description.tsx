@@ -17,7 +17,7 @@ function Description({ variantId, referenceAllele, alternateAllele }: Descriptio
           alternateAllele={alternateAllele}
         />
       </strong>. Source:{" "}
-      <Link to="https://doi.org/10.1101/2023.11.09.563812" external>
+      <Link to="https://www.nature.com/articles/s41586-026-10781-4" external>
         ENCODE rE2G
       </Link>
     </>

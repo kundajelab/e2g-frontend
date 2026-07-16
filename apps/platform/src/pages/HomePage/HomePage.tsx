@@ -154,8 +154,8 @@ function HelpBoxPanel({ fai, url, label, external = false }: HelpBoxPanelProps):
 
 const BROWSER_EXAMPLES = [
   {
-    label: "ENCODE-rE2G in 1458 cell types and tissues from ENCODE (Gschwind* et al. 2025)",
-    url: "https://www.biorxiv.org/content/10.1101/2023.11.09.563812v1",
+    label: "ENCODE-rE2G in 1458 cell types and tissues from ENCODE (Gschwind* et al. 2026)",
+    url: "https://www.nature.com/articles/s41586-026-10781-4",
   },
   {
     label: "scE2G in 46 cell types from cell lines, blood, and pancreas (Sheth*, Qiu* et al. 2025)",
